@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Library</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Seu CSS -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar navbar-expand-lg">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="#">
+                Library
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Books
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- LIBRARY -->
+
+    <main class="library-container">
+
+        <div class="library-title">
+
+            <h1>Find your next book</h1>
+
+            <p>
+                Search through thousands of books
+            </p>
+
+        </div>
+
+
+        <div class="search-card">
+
+            <div class="mainSearch">
+
+                <input class="inputSearch" type="text" id="nameBook" placeholder="Write your book here!">
+
+                <button class="btnSearch" onclick="searchBook()">
+                    Search
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Aqui o JavaScript poderá colocar os livros -->
+
+        <div id="results" class="row g-4"></div>
+
+    </main>
+
+    <div id="alerta" class="alert alert-danger d-none" role="alert">
+        <strong>Oh!</strong> Book don`t found :(
+
+        <button type="button" class="btn-close" onclick="fecharAlerta()">
+        </button>
+    </div>
+    <!-- Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <!-- Seu JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

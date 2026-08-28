@@ -1,0 +1,283 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+
+  background:
+    linear-gradient(rgba(7, 25, 43, 0.45), rgba(7, 25, 43, 0.75)),
+    url("https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=2000&q=80");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* NAVBAR */
+
+.navbar {
+  background: rgba(7, 25, 43, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.navbar-brand {
+  color: #fff !important;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: #fff !important;
+}
+
+/* CONTEÚDO */
+
+.library-container {
+  min-height: calc(100vh - 72px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px 20px;
+}
+
+/* TÍTULO */
+
+.library-title {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.library-title h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+
+  text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.library-title p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1rem;
+}
+
+/* CARD DE PESQUISA */
+
+.search-card {
+  width: min(700px, 100%);
+
+  padding: 30px;
+
+  background: rgba(190, 220, 240, 0.18);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* SEARCH */
+
+.mainSearch {
+  display: flex;
+  gap: 10px;
+}
+
+.inputSearch {
+  flex: 1;
+
+  height: 55px;
+
+  padding: 0 20px;
+
+  color: #fff;
+  font-size: 1rem;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+
+  outline: none;
+
+  transition: 0.3s;
+}
+
+.inputSearch::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.inputSearch:focus {
+  border-color: rgba(255, 255, 255, 0.7);
+
+  background: rgba(255, 255, 255, 0.18);
+
+  box-shadow: 0 0 20px rgba(130, 190, 230, 0.2);
+}
+
+/* BOTÃO */
+
+.btnSearch {
+  height: 55px;
+
+  padding: 0 25px;
+
+  color: #102a43;
+  font-weight: 600;
+
+  background: #dceeff;
+
+  border: none;
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.btnSearch:hover {
+  background: #fff;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.btnSearch:active {
+  transform: translateY(0);
+}
+
+/* RESULTADOS */
+
+#results {
+  width: min(1000px, 100%);
+
+  margin-top: 30px;
+}
+
+.book-card {
+  height: 100%;
+
+  padding: 20px;
+
+  color: #fff;
+
+  background: rgba(10, 35, 55, 0.55);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition: 0.3s;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+
+  background: rgba(20, 55, 80, 0.7);
+
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+.book-card img {
+  width: 100%;
+  height: 250px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+}
+
+.book-card h3 {
+  margin-top: 15px;
+
+  font-size: 1.1rem;
+}
+
+.book-card p {
+  color: rgba(255, 255, 255, 0.7);
+
+  font-size: 0.9rem;
+}
+
+/* MOBILE */
+
+@media (max-width: 576px) {
+  .mainSearch {
+    flex-direction: column;
+  }
+
+  .btnSearch {
+    width: 100%;
+  }
+
+  .search-card {
+    padding: 20px;
+  }
+
+  .library-container {
+    padding-top: 60px;
+  }
+}
+#alerta {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+
+  min-width: 280px;
+  max-width: 400px;
+
+  padding: 15px 20px;
+
+  border: none;
+  border-radius: 12px;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+  z-index: 9999;
+
+  animation: aparecer 0.3s ease;
+}
+
+/* Animação de entrada */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Quando o alerta estiver escondido */
+#alerta.d-none {
+  display: none !important;
+}
