@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AVOCRYPTO — Monitoramento</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+    <!-- BACKGROUND -->
+    <div class="background-glow glow-1"></div>
+    <div class="background-glow glow-2"></div>
+    <div class="background-grid"></div>
+
+    <!-- HEADER -->
+    <header class="container-fluid px-4 px-lg-5 py-4">
+
+        <div class="d-flex align-items-center justify-content-between">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    <div></div>
+                </div>
+
+                <span>AVOCRYPTO</span>
+
+            </div>
+
+            <div class="market-status">
+                <span class="status-dot"></span>
+                Mercado conectado
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="container py-4">
+
+        <!-- HERO -->
+        <section class="hero-section reveal">
+
+            <span class="small-label">
+                MONITORAMENTO DO MERCADO
+            </span>
+
+            <h1>
+                Acompanhe o mercado
+                <span>cripto.</span>
+            </h1>
+
+            <p>
+                Monitore preços e movimentações das principais
+                criptomoedas em um único lugar.
+            </p>
+
+        </section>
+
+
+        <!-- SEARCH -->
+        <section class="search-container reveal">
+
+            <div class="search-box">
+
+                <i class="bi bi-search"></i>
+
+                <input type="text" placeholder="Pesquisar criptomoeda..." id="cryptoSearch">
+
+                <span class="search-shortcut">
+                    /
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- MARKET -->
+        <section class="mt-5">
+
+            <div class="section-header reveal">
+
+                <div>
+                    <span class="small-label">
+                        MERCADO
+                    </span>
+
+                    <h2>
+                        Principais moedas
+                    </h2>
+                </div>
+
+                <button class="refresh-button">
+                    <i class="bi bi-arrow-clockwise"></i>
+                    Atualizar
+                </button>
+
+            </div>
+
+
+            <!-- CARDS -->
+            <div class="row g-3 mt-2">
+
+                <!-- BITCOIN -->
+                <div class="col-12 col-md-6 col-xl-4 reveal">
+
+                    <div class="crypto-card active-card">
+
+                        <div class="card-top">
+
+                            <div class="coin-info">
+
+                                <div class="coin-icon bitcoin">
+                                    ₿
+                                </div>
+
+                                <div>
+                                    <h3>Bitcoin</h3>
+                                    <span>BTC</span>
+                                </div>
+
+                            </div>
+
+                            <button class="star-button">
+                                <i class="bi bi-star"></i>
+                            </button>
+
+                        </div>
+
+                        <div class="price">
+                            $112,430.20
+                        </div>
+
+                        <div class="change positive">
+                            <i class="bi bi-arrow-up"></i>
+                            +2.41%
+                        </div>
+
+                        <div class="mini-chart">
+                            <div class="chart-line"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ETHEREUM -->
+                <div class="col-12 col-md-6 col-xl-4 reveal">
+
+                    <div class="crypto-card">
+
+                        <div class="card-top">
+
+                            <div class="coin-info">
+
+                                <div class="coin-icon ethereum">
+                                    Ξ
+                                </div>
+
+                                <div>
+                                    <h3>Ethereum</h3>
+                                    <span>ETH</span>
+                                </div>
+
+                            </div>
+
+                            <button class="star-button">
+                                <i class="bi bi-star"></i>
+                            </button>
+
+                        </div>
+
+                        <div class="price">
+                            $4,281.32
+                        </div>
+
+                        <div class="change positive">
+                            <i class="bi bi-arrow-up"></i>
+                            +1.83%
+                        </div>
+
+                        <div class="mini-chart">
+                            <div class="chart-line chart-two"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SOLANA -->
+                <div class="col-12 col-md-6 col-xl-4 reveal">
+
+                    <div class="crypto-card">
+
+                        <div class="card-top">
+
+                            <div class="coin-info">
+
+                                <div class="coin-icon solana">
+                                    ◎
+                                </div>
+
+                                <div>
+                                    <h3>Solana</h3>
+                                    <span>SOL</span>
+                                </div>
+
+                            </div>
+
+                            <button class="star-button">
+                                <i class="bi bi-star"></i>
+                            </button>
+
+                        </div>
+
+                        <div class="price">
+                            $201.42
+                        </div>
+
+                        <div class="change negative">
+                            <i class="bi bi-arrow-down"></i>
+                            -0.72%
+                        </div>
+
+                        <div class="mini-chart">
+                            <div class="chart-line chart-three"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- GRAPH -->
+        <section class="graph-section mt-4 reveal">
+
+            <div class="graph-header">
+
+                <div>
+
+                    <span class="small-label">
+                        BTC / USD
+                    </span>
+
+                    <h2>
+                        Bitcoin
+                    </h2>
+
+                </div>
+
+                <div class="graph-price">
+
+                    <strong>
+                        $112,430.20
+                    </strong>
+
+                    <span class="positive">
+                        +2.41%
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-area">
+
+                <div class="chart-grid"></div>
+
+                <svg class="main-chart" viewBox="0 0 1000 350" preserveAspectRatio="none">
+
+                    <defs>
+
+                        <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+
+                            <stop offset="0%" stop-color="#8ddd32" stop-opacity=".28" />
+
+                            <stop offset="100%" stop-color="#8ddd32" stop-opacity="0" />
+
+                        </linearGradient>
+
+                    </defs>
+
+
+                    <path class="chart-fill" d="
+                        M0,280
+                        C60,250 80,270 130,220
+                        C180,170 210,230 260,190
+                        C310,150 330,170 380,130
+                        C430,90 460,150 510,110
+                        C560,70 600,120 650,90
+                        C700,60 730,100 780,70
+                        C830,40 850,80 900,45
+                        C940,25 970,55 1000,20
+                        L1000,350
+                        L0,350
+                        Z
+                        " />
+
+                    <path class="chart-path" d="
+                        M0,280
+                        C60,250 80,270 130,220
+                        C180,170 210,230 260,190
+                        C310,150 330,170 380,130
+                        C430,90 460,150 510,110
+                        C560,70 600,120 650,90
+                        C700,60 730,100 780,70
+                        C830,40 850,80 900,45
+                        C940,25 970,55 1000,20
+                        " />
+
+                </svg>
+
+
+                <div class="chart-labels">
+
+                    <span>00:00</span>
+                    <span>06:00</span>
+                    <span>12:00</span>
+                    <span>18:00</span>
+                    <span>Agora</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="period-selector">
+
+                <button>1H</button>
+                <button class="selected">24H</button>
+                <button>7D</button>
+                <button>30D</button>
+                <button>1Y</button>
+
+            </div>
+
+        </section>
+
+
+        <!-- TABLE -->
+        <section class="table-section mt-4 reveal">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="small-label">
+                        VISÃO GERAL
+                    </span>
+
+                    <h2>
+                        Mercado
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="crypto-table">
+
+                <div class="table-head">
+
+                    <span>#</span>
+                    <span>Moeda</span>
+                    <span>Preço</span>
+                    <span>24h</span>
+                    <span>Market Cap</span>
+
+                </div>
+
+
+                <div class="table-row">
+
+                    <span class="rank">01</span>
+
+                    <div class="table-coin">
+
+                        <div class="coin-icon small bitcoin">
+                            ₿
+                        </div>
+
+                        <div>
+                            <strong>Bitcoin</strong>
+                            <small>BTC</small>
+                        </div>
+
+                    </div>
+
+                    <strong>$112,430.20</strong>
+
+                    <span class="positive">
+                        +2.41%
+                    </span>
+
+                    <span>
+                        $2.21T
+                    </span>
+
+                </div>
+
+
+                <div class="table-row">
+
+                    <span class="rank">02</span>
+
+                    <div class="table-coin">
+
+                        <div class="coin-icon small ethereum">
+                            Ξ
+                        </div>
+
+                        <div>
+                            <strong>Ethereum</strong>
+                            <small>ETH</small>
+                        </div>
+
+                    </div>
+
+                    <strong>$4,281.32</strong>
+
+                    <span class="positive">
+                        +1.83%
+                    </span>
+
+                    <span>
+                        $516B
+                    </span>
+
+                </div>
+
+
+                <div class="table-row">
+
+                    <span class="rank">03</span>
+
+                    <div class="table-coin">
+
+                        <div class="coin-icon small solana">
+                            ◎
+                        </div>
+
+                        <div>
+                            <strong>Solana</strong>
+                            <small>SOL</small>
+                        </div>
+
+                    </div>
+
+                    <strong>$201.42</strong>
+
+                    <span class="negative">
+                        -0.72%
+                    </span>
+
+                    <span>
+                        $109B
+                    </span>
+
+                </div>
+
+
+                <div class="table-row">
+
+                    <span class="rank">04</span>
+
+                    <div class="table-coin">
+
+                        <div class="coin-icon small">
+                            ₮
+                        </div>
+
+                        <div>
+                            <strong>Tether</strong>
+                            <small>USDT</small>
+                        </div>
+
+                    </div>
+
+                    <strong>$1.00</strong>
+
+                    <span class="positive">
+                        +0.01%
+                    </span>
+
+                    <span>
+                        $168B
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="container text-center py-5">
+
+        <div class="footer-line"></div>
+
+        <span>
+            AV0CRYPTO © 2026 — Monitoramento de mercado
+        </span>
+
+    </footer>
+
+
+    <!-- JS -->
+    <script src="../jS/api.js"></script>
+    <script src="../jS/system.js"></script>
+    <script src="../jS/animations.js"></script>
+
+</body>
+
+</html>
