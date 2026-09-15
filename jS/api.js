@@ -1,3 +1,66 @@
+async function rankingTop3() {
+
+    const resposta = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=3&page=1"
+    )
+    const dados = await resposta.json();
+
+    let ranking3 = document.getElementById("rankingtop3")
+
+    ranking3.innerHTML = ``;
+
+    dados.forEach((crypto, index) => {
+
+        ranking3.innerHTML += `<div class="col-12 col-md-6 col-xl-4">
+
+            <div class="crypto-card">
+
+                <div class="card-top">
+
+                    <div class="coin-info">
+
+                        <div class="coin-icon">
+                            ${crypto.symbol.toUpperCase()}
+                        </div>
+
+                        <div>
+                            <h3>${crypto.name}</h3>
+                            <span>${crypto.symbol.toUpperCase()}</span>
+                        </div>
+
+                    </div>
+
+                    <button class="star-button">
+                        <i class="bi bi-star"></i>
+                    </button>
+
+                </div>
+
+                <div class="price">
+                    R$ ${crypto.current_price.toLocaleString("pt-BR")}
+                </div>
+
+                <div class="change ${crypto.price_change_percentage_24h >= 0 ? " positive" : "negative"}">
+
+                ${crypto.price_change_percentage_24h >= 0 ? "↑" : "↓"}
+
+                ${crypto.price_change_percentage_24h.toFixed(2)}%
+
+            </div>
+
+            <div class="mini-chart">
+                <div class="chart-line"></div>
+            </div>
+
+        </div>
+
+            </div >
+
+            `;
+    });
+}
+
+rankingTop3()
+
 async function buscarBitcoin() {
 
     let result = document.getElementById("ResultSearch")
@@ -89,18 +152,3 @@ input.addEventListener("keydown", (event) => {
 
 
 
-
-
-
-/*{
-  "id": "bitcoin",
-  "symbol": "btc",
-  "name": "Bitcoin",
-  "current_price": 600000,
-  "market_cap": 12000000000000,
-  "total_volume": 30000000000,
-  "price_change_percentage_24h": 2.5,
-  "high_24h": 610000,
-  "low_24h": 580000
-}
-*/
