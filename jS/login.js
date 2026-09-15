@@ -1,3 +1,29 @@
+const senhaSalva = localStorage.getItem("senhaUser");
+const emailSalvo = localStorage.getItem("emailUser");
+if (senhaSalva && emailSalvo) {
+
+
+    loading.style.display = "flex"
+
+    setTimeout(() => {
+
+        loading.style.display = "none"
+
+        alertGood.style.display = "flex"
+
+    }, 4000);
+
+    setTimeout(() => {
+
+        alertGood.style.display = "flex"
+
+        setTimeout(() => {
+            window.location.href = "./Home/home.html";
+        }, 1000);
+    }, 6000)
+}
+
+
 function criarConta() {
 
     let senha = document.getElementById("password").value
@@ -55,10 +81,10 @@ function criarConta() {
             }, 1000);
         }, 6000)
 
+        localStorage.setItem("senhaUser", senha)
+
+        localStorage.setItem("emailUser", email)
     }
 
-    localStorage.setItem("senhaUser", senha)
-
-    localStorage.setItem("emailUser", email)
 
 }
