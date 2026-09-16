@@ -1,56 +1,84 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta name="description" content="AVOCRYPTO — Monitoramento de preços e movimentações do mercado de criptomoedas.">
+
+    <meta name="theme-color" content="#0b0d0f">
+
     <title>AVOCRYPTO — Monitoramento</title>
 
-    <!-- Bootstrap -->
+
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
+
+    <!-- =====================================================
+         BOOTSTRAP ICONS
+    ====================================================== -->
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <!-- CSS -->
+
+    <!-- =====================================================
+         CSS
+    ====================================================== -->
+
     <link rel="stylesheet" href="home.css">
 
 </head>
 
+
 <body>
 
-    <!-- BACKGROUND -->
 
-    <div class="background-glow glow-1"></div>
-    <div class="background-glow glow-2"></div>
-    <div class="background-grid"></div>
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="background-glow glow-1" aria-hidden="true"></div>
+
+    <div class="background-glow glow-2" aria-hidden="true"></div>
+
+    <div class="background-grid" aria-hidden="true"></div>
 
 
-    <!-- HEADER -->
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
     <header class="container-fluid px-4 px-lg-5 py-4">
 
         <div class="d-flex align-items-center justify-content-between">
 
-            <div class="brand">
+            <!-- LOGO -->
 
-                <div class="brand-icon">
+            <a href="#" class="brand text-decoration-none" aria-label="AVOCRYPTO - Página inicial">
+
+                <div class="brand-icon" aria-hidden="true">
                     <div></div>
                 </div>
 
                 <span>AVOCRYPTO</span>
 
-            </div>
+            </a>
 
-            <div class="market-status">
 
-                <span class="status-dot"></span>
+            <!-- STATUS -->
 
-                Mercado conectado
+            <div class="market-status" title="Status da conexão com o mercado">
+
+                <span class="status-dot" aria-hidden="true"></span>
+
+                <span>Mercado conectado</span>
 
             </div>
 
@@ -59,43 +87,66 @@
     </header>
 
 
-    <!-- MAIN -->
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
     <main class="container py-4">
 
 
-        <!-- HERO -->
+        <!-- =================================================
+             HERO
+        ================================================== -->
 
-        <section class="hero-section reveal">
+        <section class="hero-section reveal" aria-labelledby="hero-title">
 
             <span class="small-label">
                 MONITORAMENTO DO MERCADO
             </span>
 
-            <h1>
+
+            <h1 id="hero-title">
+
                 Acompanhe o mercado
+
                 <span>cripto.</span>
+
             </h1>
 
+
             <p>
-                Monitore preços e movimentações das principais
-                criptomoedas em um único lugar.
+
+                Monitore preços, variações e movimentações
+                das principais criptomoedas em um único lugar.
+
             </p>
 
         </section>
 
 
-        <!-- SEARCH -->
 
-        <section class="search-container reveal">
+        <!-- =================================================
+             SEARCH
+        ================================================== -->
+
+        <section class="search-container reveal" aria-label="Pesquisar criptomoeda">
 
             <div class="search-box">
 
-                <i class="bi bi-search"></i>
+                <i class="bi bi-search" aria-hidden="true"></i>
 
-                <input type="text" placeholder="Pesquisar criptomoeda..." id="cryptoSearch">
 
-                <span class="search-shortcut">
+                <label for="cryptoSearch" class="visually-hidden">
+                    Pesquisar criptomoeda
+                </label>
+
+
+                <input type="search" id="cryptoSearch" placeholder="Pesquisar criptomoeda..." autocomplete="off"
+                    spellcheck="false" aria-label="Pesquisar criptomoeda">
+
+
+                <span class="search-shortcut" aria-hidden="true">
                     /
                 </span>
 
@@ -104,15 +155,21 @@
         </section>
 
 
-        <!-- SEARCH RESULT -->
 
-        <section class="resultsSearch" id="ResultSearch">
+        <!-- =================================================
+             SEARCH RESULT
+        ================================================== -->
+
+        <section class="resultsSearch" id="ResultSearch" aria-live="polite" aria-label="Resultado da pesquisa">
         </section>
 
 
-        <!-- MARKET -->
 
-        <section class="mt-5">
+        <!-- =================================================
+             TOP 3
+        ================================================== -->
+
+        <section class="mt-5" aria-labelledby="market-title">
 
             <div class="section-header reveal">
 
@@ -122,7 +179,7 @@
                         MERCADO
                     </span>
 
-                    <h2>
+                    <h2 id="market-title">
                         Principais moedas
                     </h2>
 
@@ -131,40 +188,66 @@
             </div>
 
 
-            <!-- TOP 3 -->
+            <!--
+                Os cards são inseridos pelo api.js
+                através do ID rankingtop3.
+            -->
 
-            <div id="rankingtop3" class="row g-3 mt-2">
+            <div id="rankingtop3" class="row g-3 mt-2" aria-live="polite">
+
+                <!-- Loading inicial -->
+
+                <div class="col-12">
+
+                    <div class="text-center py-4">
+
+                        <div class="spinner-border" role="status">
+
+                            <span class="visually-hidden">
+                                Carregando moedas...
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </section>
 
 
-        <!-- GRAPH -->
 
-        <section class="graph-section mt-4 reveal">
+        <!-- =================================================
+             GRAPH
+        ================================================== -->
+
+        <section class="graph-section mt-4 reveal" aria-labelledby="bitcoin-title">
 
             <div class="graph-header">
 
                 <div>
 
                     <span class="small-label">
-                        BTC / USD
+                        BTC / BRL
                     </span>
 
-                    <h2>
-                        Bitcoin
+                    <h2 id="bitcoin-title">
+                        Ultimas notícias sobre cripto
                     </h2>
 
                 </div>
 
+
                 <div class="graph-price">
 
-                    <strong>
-                        $112,430.20
+                    <strong id="bitcoinPrice">
+                        --
                     </strong>
 
-                    <span class="positive">
-                        +2.41%
+                    <span id="bitcoinChange" class="positive">
+                        --
                     </span>
 
                 </div>
@@ -172,90 +255,56 @@
             </div>
 
 
+
+            <!-- CHART -->
+
             <div class="chart-area">
 
-                <div class="chart-grid"></div>
 
-                <svg class="main-chart" viewBox="0 0 1000 350" preserveAspectRatio="none">
-
-                    <defs>
-
-                        <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-
-                            <stop offset="0%" stop-color="#8ddd32" stop-opacity=".28" />
-
-                            <stop offset="100%" stop-color="#8ddd32" stop-opacity="0" />
-
-                        </linearGradient>
-
-                    </defs>
-
-
-                    <path class="chart-fill" d="
-                            M0,280
-                            C60,250 80,270 130,220
-                            C180,170 210,230 260,190
-                            C310,150 330,170 380,130
-                            C430,90 460,150 510,110
-                            C560,70 600,120 650,90
-                            C700,60 730,100 780,70
-                            C830,40 850,80 900,45
-                            C940,25 970,55 1000,20
-                            L1000,350
-                            L0,350
-                            Z
-                        " />
-
-                    <path class="chart-path" d="
-                            M0,280
-                            C60,250 80,270 130,220
-                            C180,170 210,230 260,190
-                            C310,150 330,170 380,130
-                            C430,90 460,150 510,110
-                            C560,70 600,120 650,90
-                            C700,60 730,100 780,70
-                            C830,40 850,80 900,45
-                            C940,25 970,55 1000,20
-                        " />
-
-                </svg>
-
-
-                <div class="chart-labels">
-
-                    <span>00:00</span>
-                    <span>06:00</span>
-                    <span>12:00</span>
-                    <span>18:00</span>
-                    <span>Agora</span>
-
-                </div>
 
             </div>
 
 
-            <div class="period-selector">
 
-                <button>1H</button>
+            <!-- PERÍODO -->
 
-                <button class="selected">
+            <div class="period-selector" role="group" aria-label="Período do gráfico">
+
+                <button type="button" data-period="1h">
+                    1H
+                </button>
+
+
+                <button type="button" class="selected" data-period="24h" aria-pressed="true">
                     24H
                 </button>
 
-                <button>7D</button>
 
-                <button>30D</button>
+                <button type="button" data-period="7d">
+                    7D
+                </button>
 
-                <button>1Y</button>
+
+                <button type="button" data-period="30d">
+                    30D
+                </button>
+
+
+                <button type="button" data-period="1y">
+                    1Y
+                </button>
 
             </div>
 
         </section>
 
 
-        <!-- TABLE -->
 
-        <section class="table-section mt-4 reveal">
+        <!-- =================================================
+             MARKET TABLE
+        ================================================== -->
+
+        <section class="table-section mt-4 reveal" aria-labelledby="overview-title">
 
             <div class="section-header">
 
@@ -265,7 +314,7 @@
                         VISÃO GERAL
                     </span>
 
-                    <h2>
+                    <h2 id="overview-title">
                         Mercado
                     </h2>
 
@@ -274,12 +323,15 @@
             </div>
 
 
+
+            <!-- TABELA -->
+
             <div class="crypto-table">
 
 
-                <!-- TABLE HEADER -->
+                <!-- CABEÇALHO -->
 
-                <div class="table-head">
+                <div class="table-head" role="row">
 
                     <span>#</span>
 
@@ -294,91 +346,29 @@
                 </div>
 
 
-                <!-- BITCOIN -->
 
-                <div class="table-row">
+                <!--
+                    O rankingTop100() do api.js
+                    coloca as criptomoedas aqui.
+                -->
 
-                    <span class="rank">
-                        01
-                    </span>
+                <div id="ranking100" aria-live="polite">
 
-                    <div class="table-coin">
+                    <!-- Loading -->
 
-                        <div class="coin-icon small bitcoin">
-                            ₿
-                        </div>
+                    <div class="text-center py-4">
 
-                        <div>
+                        <div class="spinner-border" role="status">
 
-                            <strong>
-                                Bitcoin
-                            </strong>
-
-                            <small>
-                                BTC
-                            </small>
+                            <span class="visually-hidden">
+                                Carregando mercado...
+                            </span>
 
                         </div>
 
                     </div>
 
-                    <strong>
-                        $112,430.20
-                    </strong>
-
-                    <span class="positive">
-                        +2.41%
-                    </span>
-
-                    <span>
-                        $2.21T
-                    </span>
-
                 </div>
-
-
-                <!-- ETHEREUM -->
-
-                <div class="table-row">
-
-                    <span class="rank">
-                        02
-                    </span>
-
-                    <div class="table-coin">
-
-                        <div class="coin-icon small ethereum">
-                            Ξ
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Ethereum
-                            </strong>
-
-                            <small>
-                                ETH
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                    <strong>
-                        $4,281.32
-                    </strong>
-
-                    <span class="positive">
-                        +1.83%
-                    </span>
-
-                    <span>
-                        $516B
-                    </span>
-
-                </div>
-
 
             </div>
 
@@ -387,26 +377,34 @@
     </main>
 
 
-    <!-- FOOTER -->
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
 
     <footer class="container text-center py-5">
 
-        <div class="footer-line"></div>
+        <div class="footer-line" aria-hidden="true"></div>
+
 
         <span>
-            AV0CRYPTO © 2026 — Monitoramento de mercado
+            AVOCRYPTO © 2026 — Monitoramento de mercado
         </span>
 
     </footer>
 
 
-    <!-- JS -->
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
 
     <script src="../jS/api.js"></script>
 
     <script src="../jS/system.js"></script>
 
     <script src="../jS/animations.js"></script>
+
 
 </body>
 
