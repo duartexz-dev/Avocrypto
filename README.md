@@ -1,107 +1,142 @@
-# 🥑 AVOCRYPTO
+# 🥑 Avocrypto
 
-> Monitoramento de criptomoedas com foco em informações de mercado, busca e acompanhamento de ativos.
+Monitoramento de criptomoedas diretamente pelo navegador, com busca, rankings e informações de mercado utilizando a **CoinGecko API**.
 
-O **AVOCRYPTO** é uma aplicação web desenvolvida para acompanhar o mercado de criptomoedas de forma simples e visual.
+O Avocrypto foi desenvolvido como um projeto para praticar integração com APIs, manipulação de dados, JavaScript e construção de interfaces responsivas.
 
-O projeto utiliza dados da **CoinGecko API** para apresentar informações atualizadas sobre diferentes criptomoedas, permitindo consultar preços, variações, capitalização de mercado e outros dados relevantes.
+## 📌 Sobre o projeto
 
----
+O Avocrypto permite consultar e acompanhar informações de diferentes criptomoedas através de uma interface simples e responsiva.
 
-## Sobre o projeto
+O projeto foi pensado para transformar dados vindos de uma API em informações fáceis de visualizar, trabalhando principalmente com JavaScript e requisições HTTP.
 
-O AVOCRYPTO surgiu como um projeto para estudar e aplicar conceitos de desenvolvimento web na construção de uma aplicação que consome uma API real.
+## ⚙️ Funcionalidades
 
-A ideia é transformar dados do mercado de criptomoedas em uma interface simples, organizada e responsiva.
+* 🔎 Busca por criptomoedas
+* 📊 Ranking das principais criptomoedas
+* 🏆 Top 3 criptomoedas
+* 💰 Preço atual
+* 📈 Variação de 24 horas
+* 📉 Maior e menor preço
+* 💵 Market Cap
+* 📦 Volume de negociação
+* 📱 Interface responsiva
+* ✨ Animações e efeitos visuais
+* 🌐 Integração com CoinGecko API
 
-O projeto possui uma identidade visual baseada em uma interface escura, minimalista e com elementos de glassmorphism.
+## 🛠️ Tecnologias
 
----
+* HTML5
+* CSS3
+* JavaScript
+* Bootstrap
+* CoinGecko API
 
-## Funcionalidades
-
-- [x] Ranking das principais criptomoedas
-- [x] Top 3 criptomoedas por capitalização de mercado
-- [x] Ranking com até 100 criptomoedas
-- [x] Busca de criptomoedas
-- [x] Exibição do preço em BRL
-- [x] Variação de preço nas últimas 24 horas
-- [x] Market Cap
-- [x] Volume de negociação em 24h
-- [x] Máxima e mínima das últimas 24h
-- [x] Logos oficiais das criptomoedas
-- [x] Interface responsiva
-- [x] Indicadores visuais de alta e queda
-- [ ] Sistema de favoritos
-- [ ] Gráficos com dados reais
-- [ ] Sistema de notícias
-- [ ] Melhorias na arquitetura da API
-
----
-
-## Tecnologias
-
-### Front-end
-
-- HTML5
-- CSS3
-- JavaScript
-- Bootstrap 5
-
-### API
-
-- CoinGecko API
-
----
-
-## Dados exibidos
-
-Para cada criptomoeda, o AVOCRYPTO pode apresentar informações como:
-
-| Informação | Descrição |
-|---|---|
-| Nome | Nome da criptomoeda |
-| Símbolo | Identificação do ativo |
-| Preço | Valor atual em reais |
-| Variação 24h | Alteração percentual nas últimas 24 horas |
-| Market Cap | Capitalização de mercado |
-| Volume 24h | Volume negociado nas últimas 24 horas |
-| Máxima 24h | Maior preço registrado nas últimas 24 horas |
-| Mínima 24h | Menor preço registrado nas últimas 24 horas |
-| Logo | Imagem da criptomoeda |
-
----
-
-## Interface
-
-O projeto utiliza uma interface:
-
-- Dark Mode
-- Minimalista
-- Responsiva
-- Glassmorphism
-- Cards com informações de mercado
-- Indicadores de alta e queda
-- Layout adaptado para dispositivos móveis
-
-A proposta visual é manter as informações organizadas sem deixar a interface carregada.
-
----
-
-## Estrutura do projeto
+## 📂 Estrutura
 
 ```text
-AVOCRYPTO/
-│
-├── home/
-│   └── home.html
-│
-├── css/
-│   └── style.css
-│
+Avocrypto/
+├── Home/
 ├── jS/
+│   ├── animations.js
 │   ├── api.js
-│   ├── system.js
-│   └── animations.js
-│
+│   ├── login.js
+│   ├── news.js
+│   └── system.js
+├── index.html
+├── script.js
+├── style.css
 └── README.md
+```
+
+## 🎯 Objetivo
+
+O principal objetivo do Avocrypto foi colocar em prática conceitos de desenvolvimento web, principalmente:
+
+* consumo de APIs;
+* requisições com `fetch()`;
+* manipulação do DOM;
+* organização de JavaScript;
+* criação de interfaces responsivas;
+* exibição dinâmica de dados;
+* criação de animações para melhorar a experiência do usuário.
+
+## 🌐 API
+
+Os dados de mercado utilizados no projeto são fornecidos pela **CoinGecko API**.
+
+Exemplo de informações utilizadas:
+
+```text
+Preço
+Market Cap
+Volume
+Variação de 24h
+Máxima
+Mínima
+Ranking
+```
+
+## ⚠️ Limitação conhecida — CORS
+
+Durante o desenvolvimento, encontrei um problema relacionado ao **CORS (Cross-Origin Resource Sharing)**.
+
+Atualmente, o navegador faz as requisições diretamente para a CoinGecko:
+
+```text
+Avocrypto
+   ↓
+JavaScript
+   ↓
+CoinGecko API
+```
+
+Dependendo da configuração da API e do ambiente em que o projeto está sendo executado, o navegador pode bloquear essas requisições por questões de segurança.
+
+A solução mais adequada seria adicionar uma camada intermediária, como um backend, serverless function ou proxy:
+
+```text
+Avocrypto
+   ↓
+Backend / Proxy
+   ↓
+CoinGecko API
+```
+
+### Por que o problema ainda não foi resolvido?
+
+Decidi manter essa limitação neste momento porque o objetivo principal do projeto foi **aprendizado e prática**. Implementar uma infraestrutura intermediária poderia gerar custos e adicionar uma camada maior de complexidade que não fazia parte do objetivo inicial do projeto.
+
+Por isso, o Avocrypto permanece como um projeto de estudo, documentando também uma limitação real encontrada durante o desenvolvimento e uma possível solução para uma futura versão.
+
+## 📚 Aprendizados
+
+Durante o desenvolvimento, o projeto serviu para praticar principalmente:
+
+```text
+JavaScript
+↓
+Fetch API
+↓
+APIs externas
+↓
+Manipulação do DOM
+↓
+Dados dinâmicos
+↓
+Responsividade
+↓
+Animações
+↓
+Problemas de CORS
+```
+
+## 🚧 Status
+
+**Projeto de estudo e desenvolvimento contínuo.**
+
+Novas melhorias podem ser adicionadas futuramente, principalmente relacionadas à arquitetura da comunicação com APIs e à experiência do usuário.
+
+---
+
+**Desenvolvido por Arthur Duarte**
