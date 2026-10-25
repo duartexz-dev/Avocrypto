@@ -136,96 +136,48 @@
 
 
 
-        <!-- =================================================
-             SEARCH
-        ================================================== -->
-
-        <section class="search-container reveal" aria-label="Pesquisar criptomoeda">
-
-            <div class="search-box">
-
-                <i class="bi bi-search" aria-hidden="true"></i>
-
-
-                <label for="cryptoSearch" class="visually-hidden">
-                    Pesquisar criptomoeda
-                </label>
-
-
-                <input type="search" id="cryptoSearch" placeholder="Pesquisar criptomoeda..." autocomplete="off"
-                    spellcheck="false" aria-label="Pesquisar criptomoeda">
-
-
-                <span class="search-shortcut" aria-hidden="true">
-                    /
-                </span>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             SEARCH RESULT
-        ================================================== -->
-
-        <section class="resultsSearch" id="ResultSearch" aria-live="polite" aria-label="Resultado da pesquisa">
-        </section>
-
-
-
-        <!-- =================================================
-             TOP 3
-        ================================================== -->
-
-        <section class="mt-5" aria-labelledby="market-title">
-
-            <div class="section-header reveal">
-
-                <div>
-
-                    <span class="small-label">
-                        MERCADO
-                    </span>
-
-                    <h2 id="market-title">
-                        Principais moedas
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-            <!--
-                Os cards são inseridos pelo api.js
-                através do ID rankingtop3.
-            -->
-
-            <div id="rankingtop3" class="row g-3 mt-2" aria-live="polite">
-
-                <!-- Loading inicial -->
-
-                <div class="col-12">
-
-                    <div class="text-center py-4">
-
-                        <div class="spinner-border" role="status">
-
-                            <span class="visually-hidden">
-                                Carregando moedas...
-                            </span>
-
-                        </div>
-
+        <div class="dashboard-overview">
+            <section class="dashboard-panel search-panel reveal" aria-labelledby="search-title">
+                <div class="section-header">
+                    <div>
+                        <span class="small-label">PESQUISA</span>
+                        <h2 id="search-title">Encontre uma moeda</h2>
                     </div>
-
                 </div>
 
-            </div>
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="bi bi-search" aria-hidden="true"></i>
+                        <label for="cryptoSearch" class="visually-hidden">Pesquisar criptomoeda</label>
+                        <input type="search" id="cryptoSearch" placeholder="Ex.: bitcoin" autocomplete="off"
+                            spellcheck="false" aria-label="Pesquisar criptomoeda">
+                        <span class="search-shortcut" aria-hidden="true">/</span>
+                    </div>
+                </div>
 
-        </section>
+                <section class="resultsSearch" id="ResultSearch" aria-live="polite"
+                    aria-label="Resultado da pesquisa"></section>
+            </section>
+
+            <section class="dashboard-panel top-three-panel reveal" aria-labelledby="market-title">
+                <div class="section-header">
+                    <div>
+                        <span class="small-label">MERCADO</span>
+                        <h2 id="market-title">Top 3 moedas</h2>
+                    </div>
+                </div>
+
+                <div id="rankingtop3" class="row g-3 mt-2" aria-live="polite">
+                    <div class="col-12">
+                        <div class="text-center py-4">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Carregando moedas...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
 
 
@@ -267,7 +219,7 @@
              MARKET TABLE
         ================================================== -->
 
-        <section class="table-section mt-4 reveal" aria-labelledby="overview-title">
+        <section class="table-section mt-5 reveal" aria-labelledby="overview-title">
 
             <div class="section-header">
 
@@ -332,6 +284,11 @@
                     </div>
 
                 </div>
+
+                <details class="ranking-more" id="rankingMore">
+                    <summary>Ver mais moedas</summary>
+                    <div id="rankingRest" aria-live="polite"></div>
+                </details>
 
             </div>
 
