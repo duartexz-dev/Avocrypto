@@ -1,8 +1,9 @@
 /* =========================================================
    TOP 3
 ========================================================= */
-
+console.log("API.JS CARREGOU");
 async function rankingTop3() {
+    console.log("API.JS → TOP 3 iniciou");
 
     const resposta = await fetch(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=3&page=1"
@@ -59,7 +60,7 @@ async function rankingTop3() {
                             aria-label="Adicionar ${crypto.name} aos favoritos"
                         >
 
-                            <i class="bi bi-star"></i>
+                             <i class="bi bi-star" onclick="favoriteCoin('${crypto.name}')"></i>
 
                         </button>
 
@@ -107,7 +108,7 @@ async function rankingTop3() {
 ========================================================= */
 
 async function buscarBitcoin() {
-
+    console.log("API.JS → PESQUISA iniciou");
     let result = document.getElementById("ResultSearch");
 
     let nameCrypto = document
@@ -133,7 +134,7 @@ async function buscarBitcoin() {
     const dados = await resposta.json();
 
 
-    const id = dados.id;
+
     const nome = dados.name;
     const simbolo = dados.symbol;
 
@@ -158,30 +159,7 @@ async function buscarBitcoin() {
         dados.market_data.current_price.brl;
 
 
-    const dadosCrypto = `
 
-        ID: ${id}
-
-        Nome: ${nome}
-
-        Símbolo: ${simbolo}
-
-        Preço: R$ ${preco}
-
-        Market Cap: R$ ${marketCap}
-
-        Volume 24h: R$ ${volume}
-
-        Variação 24h: ${variacao24h}%
-
-        Máxima 24h: R$ ${maxima24h}
-
-        Mínima 24h: R$ ${minima24h}
-
-    `;
-
-
-    console.log(dadosCrypto);
 
 
     result.innerHTML = `
@@ -343,6 +321,7 @@ input.addEventListener("keydown", (event) => {
 ========================================================= */
 
 async function rankingTop100() {
+    console.log("API.JS → TOP 100 iniciou");
 
     const resposta = await fetch(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=100&page=1"
@@ -453,13 +432,7 @@ async function rankingTop100() {
         `;
     });
 }
-
-
-
-/* =========================================================
-   INICIALIZAÇÃO
-========================================================= */
+console.log("API.JS CHEGOU AO FINAL");
 
 rankingTop100();
-
 rankingTop3();

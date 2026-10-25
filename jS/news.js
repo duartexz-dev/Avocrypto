@@ -1,6 +1,6 @@
 
 async function news() {
-
+    console.log("NEWS.JS → NEWS iniciou");
     let lastnews = document.getElementById("lastNews")
     lastnews.innerHTML = ``;
 
@@ -57,3 +57,4 @@ async function news() {
 }
 
 news()
+
