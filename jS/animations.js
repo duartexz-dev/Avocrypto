@@ -1,338 +1,132 @@
 /* =========================================
-   AV0CRYPTO
-   VISUAL / ANIMATIONS
+   AVOCRYPTO — VISUAL / ANIMATIONS
 ========================================= */
 
-
-/* =========================================
-   REVEAL AO ENTRAR NA TELA
-========================================= */
+/* ---- reveal on scroll ---- */
 
 const revealElements = document.querySelectorAll(".reveal");
 
-
-const revealObserver = new IntersectionObserver(
-    (entries) => {
-
-        entries.forEach((entry) => {
-
-            if (entry.isIntersecting) {
-
-                entry.target.classList.add("visible");
-
-                revealObserver.unobserve(entry.target);
-
-            }
-
-        });
-
-    },
-    {
-        threshold: 0.12
-    }
-);
-
-
-revealElements.forEach((element, index) => {
-
-    element.style.animationDelay = `${index * 80}ms`;
-
-    revealObserver.observe(element);
-
-});
-
-
-/* =========================================
-   EFEITO PARALLAX DO MOUSE
-========================================= */
-
-const glowOne = document.querySelector(".glow-1");
-const glowTwo = document.querySelector(".glow-2");
-
-
-document.addEventListener("mousemove", (event) => {
-
-    const x = event.clientX / window.innerWidth - 0.5;
-    const y = event.clientY / window.innerHeight - 0.5;
-
-
-    if (glowOne) {
-
-        glowOne.style.transform =
-            `translate(${x * 35}px, ${y * 35}px)`;
-
-    }
-
-
-    if (glowTwo) {
-
-        glowTwo.style.transform =
-            `translate(${x * -25}px, ${y * -25}px)`;
-
-    }
-
-});
-
-
-/* =========================================
-   HOVER 3D DOS CARDS
-========================================= */
-
-const cards = document.querySelectorAll(".crypto-card");
-
-
-cards.forEach((card) => {
-
-    card.addEventListener("mousemove", (event) => {
-
-        const rect = card.getBoundingClientRect();
-
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-
-
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-
-        const rotateX =
-            ((y - centerY) / centerY) * -3;
-
-
-        const rotateY =
-            ((x - centerX) / centerX) * 3;
-
-
-        card.style.transform =
-            `perspective(800px)
-             rotateX(${rotateX}deg)
-             rotateY(${rotateY}deg)
-             translateY(-7px)`;
-
-    });
-
-
-    card.addEventListener("mouseleave", () => {
-
-        card.style.transform =
-            "perspective(800px) rotateX(0) rotateY(0) translateY(0)";
-
-    });
-
-});
-
-
-/* =========================================
-   BOTÃO DE FAVORITO
-========================================= */
-
-const stars = document.querySelectorAll(".star-button");
-
-
-stars.forEach((button) => {
-
-    button.addEventListener("click", () => {
-
-        const icon = button.querySelector("i");
-
-        icon.classList.toggle("bi-star");
-
-        icon.classList.toggle("bi-star-fill");
-
-
-        if (icon.classList.contains("bi-star-fill")) {
-
-            button.style.color = "#8ddd32";
-
-            button.animate(
-                [
-                    {
-                        transform: "scale(1)"
-                    },
-
-                    {
-                        transform: "scale(1.4)"
-                    },
-
-                    {
-                        transform: "scale(1)"
-                    }
-                ],
-                {
-                    duration: 350
+if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    revealObserver.unobserve(entry.target);
                 }
-            );
+            });
+        },
+        { threshold: 0.12 }
+    );
 
-        } else {
-
-            button.style.color = "";
-
-        }
-
+    revealElements.forEach((element, index) => {
+        element.style.animationDelay = `${index * 60}ms`;
+        revealObserver.observe(element);
     });
+} else {
+    revealElements.forEach((element) => element.classList.add("visible"));
+}
 
+/* ---- persisted color theme ---- */
+
+const themeButton = document.querySelector("#themeToggle");
+const savedTheme = localStorage.getItem("avocrypto-theme");
+const initialTheme = savedTheme === "light" ? "light" : "dark";
+
+function setTheme(theme) {
+    const isLight = theme === "light";
+    document.documentElement.dataset.theme = theme;
+
+    if (themeButton) {
+        themeButton.setAttribute("aria-pressed", String(isLight));
+        themeButton.setAttribute(
+            "aria-label",
+            isLight ? "Ativar tema escuro" : "Ativar tema claro"
+        );
+        themeButton.innerHTML = `
+            <i class="bi ${isLight ? "bi-moon-stars" : "bi-sun"}" aria-hidden="true"></i>
+            <span>Tema ${isLight ? "escuro" : "claro"}</span>
+        `;
+    }
+}
+
+setTheme(initialTheme);
+
+themeButton?.addEventListener("click", () => {
+    const nextTheme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+    localStorage.setItem("avocrypto-theme", nextTheme);
+    setTheme(nextTheme);
 });
 
+/* ---- favorite toggle ---- */
 
-/* =========================================
-   BOTÃO ATUALIZAR
-========================================= */
+document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
 
-const refreshButton =
-    document.querySelector(".refresh-button");
+    const button = event.target.closest(".star-button");
+    if (!button) return;
 
+    const icon = button.querySelector("i");
+    if (!icon) return;
+
+    const isFavorite = icon.classList.toggle("bi-star-fill");
+    icon.classList.toggle("bi-star", !isFavorite);
+    button.style.color = isFavorite ? "var(--accent)" : "";
+    button.setAttribute("aria-pressed", String(isFavorite));
+    button.setAttribute(
+        "aria-label",
+        button.getAttribute("aria-label").replace(
+            isFavorite ? "Adicionar" : "Remover",
+            isFavorite ? "Remover" : "Adicionar"
+        )
+    );
+
+    if (isFavorite && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        button.animate(
+            [{ transform: "scale(1)" }, { transform: "scale(1.25)" }, { transform: "scale(1)" }],
+            { duration: 250 }
+        );
+    }
+});
+
+/* ---- refresh button ---- */
+
+const refreshButton = document.querySelector(".refresh-button");
 
 if (refreshButton) {
-
     refreshButton.addEventListener("click", () => {
-
-        const icon =
-            refreshButton.querySelector("i");
-
+        const icon = refreshButton.querySelector("i");
+        if (!icon || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
         icon.animate(
-            [
-                {
-                    transform: "rotate(0deg)"
-                },
-
-                {
-                    transform: "rotate(360deg)"
-                }
-            ],
-            {
-                duration: 650
-            }
+            [{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }],
+            { duration: 500 }
         );
-
     });
-
 }
 
+/* ---- period selector ---- */
 
-/* =========================================
-   SELETOR DE PERÍODO
-========================================= */
-
-const periodButtons =
-    document.querySelectorAll(".period-selector button");
-
+const periodButtons = document.querySelectorAll(".period-selector button");
 
 periodButtons.forEach((button) => {
-
     button.addEventListener("click", () => {
-
-        periodButtons.forEach((item) => {
-
-            item.classList.remove("selected");
-
-        });
-
-
+        periodButtons.forEach((item) => item.classList.remove("selected"));
         button.classList.add("selected");
-
     });
-
 });
 
+/* ---- "/" focuses search ---- */
 
-/* =========================================
-   ATALHO "/" PARA BUSCA
-========================================= */
-
-const searchInput =
-    document.querySelector("#cryptoSearch");
-
+const searchInput = document.querySelector("#cryptoSearch");
 
 document.addEventListener("keydown", (event) => {
-
-    if (
-        event.key === "/" &&
-        document.activeElement !== searchInput
-    ) {
-
+    if (event.key === "/" && document.activeElement !== searchInput && searchInput) {
         event.preventDefault();
-
         searchInput.focus();
-
     }
 
-
-    if (event.key === "Escape") {
-
+    if (event.key === "Escape" && searchInput) {
         searchInput.blur();
-
     }
-
 });
-
-
-/* =========================================
-   EFEITO DE DIGITAÇÃO NA BUSCA
-========================================= */
-
-if (searchInput) {
-
-    searchInput.addEventListener("focus", () => {
-
-        searchInput.parentElement.animate(
-            [
-                {
-                    transform: "scale(1)"
-                },
-
-                {
-                    transform: "scale(1.01)"
-                },
-
-                {
-                    transform: "scale(1)"
-                }
-            ],
-            {
-                duration: 350
-            }
-        );
-
-    });
-
-}
-
-
-/* =========================================
-   PULSO DO STATUS DO MERCADO
-========================================= */
-
-const statusDot =
-    document.querySelector(".status-dot");
-
-
-if (statusDot) {
-
-    setInterval(() => {
-
-        statusDot.animate(
-            [
-                {
-                    opacity: 1,
-                    transform: "scale(1)"
-                },
-
-                {
-                    opacity: .45,
-                    transform: "scale(1.5)"
-                },
-
-                {
-                    opacity: 1,
-                    transform: "scale(1)"
-                }
-            ],
-            {
-                duration: 1500
-            }
-        );
-
-    }, 2000);
-
-}

@@ -1,7 +1,7 @@
 /* =========================================================
    TOP 3
 ========================================================= */
-console.log("API.JS CARREGOU");
+
 async function rankingTop3() {
     console.log("API.JS → TOP 3 iniciou");
 
@@ -58,9 +58,10 @@ async function rankingTop3() {
                             class="star-button"
                             type="button"
                             aria-label="Adicionar ${crypto.name} aos favoritos"
+                            aria-pressed="false"
                         >
 
-                             <i class="bi bi-star" onclick="favoriteCoin('${crypto.name}')"></i>
+                             <i class="bi bi-star" aria-hidden="true"></i>
 
                         </button>
 
@@ -108,7 +109,6 @@ async function rankingTop3() {
 ========================================================= */
 
 async function buscarBitcoin() {
-    console.log("API.JS → PESQUISA iniciou");
     let result = document.getElementById("ResultSearch");
 
     let nameCrypto = document
@@ -120,7 +120,8 @@ async function buscarBitcoin() {
 
     if (!nameCrypto) {
 
-        result.innerHTML = "";
+        result
+            .innerHTML = "Sem resultados , verifique se o nome da cripto está certo!"
 
         return;
     }
@@ -321,7 +322,7 @@ input.addEventListener("keydown", (event) => {
 ========================================================= */
 
 async function rankingTop100() {
-    console.log("API.JS → TOP 100 iniciou");
+
 
     const resposta = await fetch(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=100&page=1"
@@ -432,7 +433,6 @@ async function rankingTop100() {
         `;
     });
 }
-console.log("API.JS CHEGOU AO FINAL");
 
 rankingTop100();
 rankingTop3();

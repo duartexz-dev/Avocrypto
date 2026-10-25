@@ -10,6 +10,7 @@
 
     <meta name="theme-color" content="#0b0d0f">
 
+
     <title>AVOCRYPTO — Monitoramento</title>
 
 
@@ -38,6 +39,7 @@
 
 <body>
 
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
 
     <!-- =====================================================
          BACKGROUND
@@ -57,7 +59,7 @@
 
     <header class="container-fluid px-4 px-lg-5 py-4">
 
-        <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center justify-content-between header-inner">
 
             <!-- LOGO -->
 
@@ -74,12 +76,20 @@
 
             <!-- STATUS -->
 
-            <div class="market-status" title="Status da conexão com o mercado">
+            <div class="header-actions">
+                <div class="market-status" title="Status da conexão com o mercado">
 
-                <span class="status-dot" aria-hidden="true"></span>
+                    <span class="status-dot" aria-hidden="true"></span>
 
-                <span>Mercado conectado</span>
+                    <span>Mercado conectado</span>
 
+                </div>
+
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar tema claro"
+                    aria-pressed="false">
+                    <i class="bi bi-sun" aria-hidden="true"></i>
+                    <span>Tema claro</span>
+                </button>
             </div>
 
         </div>
@@ -92,7 +102,7 @@
          MAIN
     ====================================================== -->
 
-    <main class="container py-4">
+    <main class="container py-4" id="main-content">
 
 
         <!-- =================================================
@@ -224,32 +234,19 @@
              GRAPH
         ================================================== -->
 
-        <section class="graph-section mt-4 reveal" aria-labelledby="bitcoin-title">
+        <section class="news-section mt-5 reveal" aria-labelledby="news-title">
 
-            <div class="graph-header">
+            <div class="section-header news-heading">
 
                 <div>
 
                     <span class="small-label">
-                        BTC / BRL
+                        FIQUE POR DENTRO
                     </span>
 
-                    <h2 id="bitcoin-title">
-                        Ultimas notícias sobre cripto
+                    <h2 id="news-title">
+                        Notícias do mercado
                     </h2>
-
-                </div>
-
-
-                <div class="graph-price">
-
-                    <strong id="bitcoinPrice">
-                        --
-                    </strong>
-
-                    <span id="bitcoinChange" class="positive">
-                        --
-                    </span>
 
                 </div>
 
@@ -258,40 +255,8 @@
 
 
             <!-- CHART -->
-            <div id="lastNews" class="row g-3">
+            <div id="lastNews" class="row g-3 mt-2" aria-live="polite" aria-busy="true">
                 <!-- Notícias serão inseridas aqui -->
-            </div>
-
-
-
-            <!-- PERÍODO -->
-
-            <div class="period-selector" role="group" aria-label="Período do gráfico">
-
-                <button type="button" data-period="1h">
-                    1H
-                </button>
-
-
-                <button type="button" class="selected" data-period="24h" aria-pressed="true">
-                    24H
-                </button>
-
-
-                <button type="button" data-period="7d">
-                    7D
-                </button>
-
-
-                <button type="button" data-period="30d">
-                    30D
-                </button>
-
-
-                <button type="button" data-period="1y">
-                    1Y
-                </button>
-
             </div>
 
         </section>
@@ -373,6 +338,7 @@
         </section>
 
     </main>
+
 
 
 

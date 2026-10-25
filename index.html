@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Avocrypto | Login</title>
 
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Fraunces (display), Inter (ui), IBM Plex Mono (data) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
+        rel="stylesheet">
 
     <!-- Bootstrap 5 CSS & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,8 +30,8 @@
         <div class="login-header text-center mb-4">
             <div class="brand-logo-lg mx-auto mb-3 d-flex align-items-center justify-content-center">
                 <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C7 2 3 8 3 13C3 18 7 22 12 22C17 22 21 18 21 13C21 8 17 2 12 2Z" fill="#B7E86A" />
-                    <circle cx="12" cy="14" r="4" fill="#7A4528" />
+                    <path d="M12 2C7 2 3 8 3 13C3 18 7 22 12 22C17 22 21 18 21 13C21 8 17 2 12 2Z" fill="#7FA858" />
+                    <circle cx="12" cy="14" r="4" fill="#8A5A37" />
                 </svg>
             </div>
             <h1 class="brand-title-lg mb-1">AVOCRYPTO</h1>
@@ -41,7 +43,7 @@
 
             <!-- CAMPO EMAIL / USUARIO -->
             <div class="input-group-custom mb-3">
-                <label for="email" class="input-label">E-mail ou Usuário</label>
+                <label for="email" class="input-label">E-mail ou usuário</label>
                 <div class="input-wrapper">
                     <i class="bi bi-envelope input-icon"></i>
                     <input type="email" id="email" class="form-control-avo" placeholder="seu@email.com" required
@@ -73,7 +75,7 @@
 
             <!-- BOTAO PRINCIPAL DE ENTAR -->
             <button type="submit" class="btn btn-avo-primary w-100 py-3 mb-3 fw-bold" onclick="criarConta()">
-                Entrar na Conta
+                Entrar na conta
             </button>
 
             <!-- DIVISOR -->
@@ -85,7 +87,7 @@
             <button type="button"
                 class="btn btn-avo-outline w-100 py-2 d-flex align-items-center justify-content-center gap-2 mb-4">
                 <i class="bi bi-fingerprint fs-5"></i>
-                <span>Entrar com Biometria</span>
+                <span>Entrar com biometria</span>
             </button>
 
             <!-- CADASTRO -->
@@ -101,7 +103,7 @@
         <span class="alert-icon">!</span>
 
         <div class="alert-content">
-            <strong>Ops!</strong>
+            <strong>Não foi possível entrar</strong>
             <span id="avisoRuim"></span>
         </div>
 
@@ -116,8 +118,8 @@
         <span class="alert-icon">✓</span>
 
         <div class="alert-content">
-            <strong>Sucesso!</strong>
-            <span>Conta criada com sucesso.</span>
+            <strong>Conta criada</strong>
+            <span>Você já pode entrar com seu e-mail e senha.</span>
         </div>
 
         <button onclick="document.getElementById('alertGood').style.display='none'">
