@@ -1,141 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Avocrypto | Login</title>
+    <meta name="theme-color" content="#101410">
+    <meta name="description" content="Acesse a demonstração do painel de mercado Avocrypto.">
+    <title>Avocrypto — Acesso à demonstração</title>
 
-    <!-- Google Fonts: Fraunces (display), Inter (ui), IBM Plex Mono (data) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
-        rel="stylesheet">
-
-    <!-- Bootstrap 5 CSS & Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- Avocrypto Style -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-
-<body class="d-flex align-items-center justify-content-center min-vh-100 py-4">
-
-    <!-- LOGIN CONTAINER CARD -->
-    <div class="login-container p-4 p-sm-5">
-
-        <!-- HEADER / LOGO -->
-        <div class="login-header text-center mb-4">
-            <div class="brand-logo-lg mx-auto mb-3 d-flex align-items-center justify-content-center">
-                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C7 2 3 8 3 13C3 18 7 22 12 22C17 22 21 18 21 13C21 8 17 2 12 2Z" fill="#7FA858" />
-                    <circle cx="12" cy="14" r="4" fill="#8A5A37" />
-                </svg>
+<body class="login-page">
+    <main class="login-layout">
+        <section class="login-intro" aria-labelledby="brand-title">
+            <a class="brand" href="./index.html" aria-label="Avocrypto — início">
+                <span class="brand-mark" aria-hidden="true"><span></span></span>
+                <span class="brand-name">avocrypto<span>.</span></span>
+            </a>
+            <div class="intro-copy">
+                <span class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> INTELIGÊNCIA DE MERCADO</span>
+                <h1 id="brand-title">Decisões melhores<br>começam com <span>clareza.</span></h1>
+                <p>Uma leitura direta dos ativos digitais. Acompanhe preços, variações e contexto em um só lugar.</p>
             </div>
-            <h1 class="brand-title-lg mb-1">AVOCRYPTO</h1>
-            <p class="login-subtitle">Acesse sua conta para acompanhar o mercado</p>
-        </div>
+            <div class="intro-footnote">
+                <span class="intro-rule" aria-hidden="true"></span>
+                <span>Dados informativos. Não constituem recomendação de investimento.</span>
+            </div>
+        </section>
 
-        <!-- FORMULARIO DE LOGIN -->
-        <form id="form-login" onsubmit="return false;">
+        <section class="login-panel" aria-labelledby="login-title">
+            <div class="login-header">
+                <span class="section-kicker">ACESSO AO PRODUTO</span>
+                <h2 id="login-title">Entre na demonstração</h2>
+                <p>Use um e-mail e uma senha de teste para abrir o painel.</p>
+            </div>
 
-            <!-- CAMPO EMAIL / USUARIO -->
-            <div class="input-group-custom mb-3">
-                <label for="email" class="input-label">E-mail ou usuário</label>
-                <div class="input-wrapper">
-                    <i class="bi bi-envelope input-icon"></i>
-                    <input type="email" id="email" class="form-control-avo" placeholder="seu@email.com" required
-                        autocomplete="email">
+            <div class="demo-notice" role="note">
+                <i class="bi bi-info-circle" aria-hidden="true"></i>
+                <p>Este protótipo não tem autenticação segura. Os dados ficam somente neste navegador. Não use uma senha real.</p>
+            </div>
+
+            <form id="form-login" novalidate>
+                <div class="input-group-custom">
+                    <label class="input-label" for="email">E-mail</label>
+                    <div class="input-wrapper">
+                        <i class="bi bi-envelope" aria-hidden="true"></i>
+                        <input type="email" id="email" class="form-control-avo" placeholder="voce@exemplo.com"
+                            autocomplete="email" inputmode="email" required aria-describedby="email-error">
+                    </div>
+                    <span class="field-error" id="email-error"></span>
                 </div>
-            </div>
 
-            <!-- CAMPO SENHA -->
-            <div class="input-group-custom mb-3">
-                <label for="password" class="input-label">Senha</label>
-                <div class="input-wrapper">
-                    <i class="bi bi-lock input-icon"></i>
-                    <input type="password" id="password" class="form-control-avo" placeholder="••••••••" required
-                        autocomplete="current-password">
-
+                <div class="input-group-custom">
+                    <label class="input-label" for="password">Senha de demonstração</label>
+                    <div class="input-wrapper">
+                        <i class="bi bi-lock" aria-hidden="true"></i>
+                        <input type="password" id="password" class="form-control-avo" placeholder="Mínimo de 8 caracteres"
+                            autocomplete="current-password" required minlength="8" aria-describedby="password-error">
+                    </div>
+                    <span class="field-error" id="password-error"></span>
                 </div>
+
+                <button type="submit" class="btn-avo-primary" id="loginSubmit">
+                    <span>Acessar painel de demonstração</span>
+                    <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+                </button>
+                <p class="form-footnote">Sem conta, recuperação de senha ou biometria neste protótipo.</p>
+            </form>
+
+            <div class="login-bottom">
+                <span class="brand-mini">AVO<span>CRYPTO</span></span>
+                <span>Projeto de demonstração</span>
             </div>
+        </section>
+    </main>
 
-            <!-- LEMBRAR-ME & ESQUECEU A SENHA -->
-            <div class="d-flex justify-content-between align-items-center mb-4 fs-8">
-                <div class="form-check custom-checkbox">
-                    <input class="form-check-input" type="checkbox" id="rememberMe">
-                    <label class="form-check-label text-muted" for="rememberMe">
-                        Lembrar-me
-                    </label>
-                </div>
-                <a href="#" class="link-forgot">Esqueceu a senha?</a>
-            </div>
-
-            <!-- BOTAO PRINCIPAL DE ENTAR -->
-            <button type="submit" class="btn btn-avo-primary w-100 py-3 mb-3 fw-bold" onclick="criarConta()">
-                Entrar na conta
-            </button>
-
-            <!-- DIVISOR -->
-            <div class="divider d-flex align-items-center my-3">
-                <span>ou</span>
-            </div>
-
-            <!-- LOGIN COM BIOMETRIA / RÁPIDO -->
-            <button type="button"
-                class="btn btn-avo-outline w-100 py-2 d-flex align-items-center justify-content-center gap-2 mb-4">
-                <i class="bi bi-fingerprint fs-5"></i>
-                <span>Entrar com biometria</span>
-            </button>
-
-            <!-- CADASTRO -->
-            <div class="auth-links text-center">
-                <span class="text-muted fs-8">Ainda não tem uma conta?</span>
-                <a href="#" class="link-register fw-bold ms-1 fs-8">Criar conta</a>
-            </div>
-
-        </form>
-    </div>
-    <!-- ALERTA DE ERRO -->
-    <div id="alertBad" class="alert-badge alert-error" style="display: none;">
-        <span class="alert-icon">!</span>
-
+    <div id="alertBad" class="alert-badge alert-error" role="alert" aria-live="assertive" hidden>
+        <span class="alert-icon" aria-hidden="true">!</span>
         <div class="alert-content">
-            <strong>Não foi possível entrar</strong>
+            <strong>Não foi possível continuar</strong>
             <span id="avisoRuim"></span>
         </div>
-
-        <button onclick="document.getElementById('alertBad').style.display='none'">
-            ×
-        </button>
+        <button type="button" class="alert-dismiss" aria-label="Fechar mensagem de erro">&times;</button>
     </div>
 
-
-    <!-- ALERTA DE SUCESSO -->
-    <div id="alertGood" class="alert-badge alert-success" style="display: none;">
-        <span class="alert-icon">✓</span>
-
+    <div id="alertGood" class="alert-badge alert-success" role="status" aria-live="polite" hidden>
+        <span class="alert-icon" aria-hidden="true">✓</span>
         <div class="alert-content">
-            <strong>Conta criada</strong>
-            <span>Você já pode entrar com seu e-mail e senha.</span>
+            <strong>Acesso de demonstração liberado</strong>
+            <span>Abrindo o painel…</span>
         </div>
-
-        <button onclick="document.getElementById('alertGood').style.display='none'">
-            ×
-        </button>
     </div>
 
-
-    <!-- LOADING -->
-    <div style="display: none;" id="loading">
-        <div class="bola-loading"></div>
+    <div id="loading" class="loading-overlay" role="status" aria-live="polite" hidden>
+        <span class="loading-indicator" aria-hidden="true"></span>
+        <span>Preparando a demonstração…</span>
     </div>
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+
+    <script src="./script.js"></script>
     <script src="./jS/login.js"></script>
 </body>
-
 </html>

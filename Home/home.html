@@ -8,31 +8,22 @@
 
     <meta name="description" content="AVOCRYPTO — Monitoramento de preços e movimentações do mercado de criptomoedas.">
 
-    <meta name="theme-color" content="#0b0d0f">
-
-
-    <title>AVOCRYPTO — Monitoramento</title>
-
-
-    <!-- =====================================================
-         BOOTSTRAP
-    ====================================================== -->
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-    <!-- =====================================================
-         BOOTSTRAP ICONS
-    ====================================================== -->
+    <meta name="theme-color" content="#101410">
+    <title>Avocrypto — Inteligência de mercado</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
-
-    <!-- =====================================================
-         CSS
-    ====================================================== -->
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="home.css">
+    <script>
+        try {
+            document.documentElement.dataset.theme =
+                localStorage.getItem("avocrypto-theme") === "light" ? "light" : "dark";
+        } catch (error) {
+            console.warn("A preferência de tema não pôde ser carregada.", error);
+        }
+    </script>
 
 </head>
 
@@ -41,289 +32,133 @@
 
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
 
-    <!-- =====================================================
-         BACKGROUND
-    ====================================================== -->
-
-    <div class="background-glow glow-1" aria-hidden="true"></div>
-
-    <div class="background-glow glow-2" aria-hidden="true"></div>
-
-    <div class="background-grid" aria-hidden="true"></div>
-
-
-
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
-
-    <header class="container-fluid px-4 px-lg-5 py-4">
-
-        <div class="d-flex align-items-center justify-content-between header-inner">
-
-            <!-- LOGO -->
-
-            <a href="#" class="brand text-decoration-none" aria-label="AVOCRYPTO - Página inicial">
-
-                <div class="brand-icon" aria-hidden="true">
-                    <div></div>
-                </div>
-
-                <span>AVOCRYPTO</span>
-
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="../index.html" class="brand" aria-label="Avocrypto — tela inicial">
+                <span class="brand-mark" aria-hidden="true"><span></span></span>
+                <span class="brand-name">avocrypto<span>.</span></span>
             </a>
 
-
-            <!-- STATUS -->
-
             <div class="header-actions">
-                <div class="market-status" title="Status da conexão com o mercado">
-
+                <div class="market-status" id="marketStatus" data-state="source">
                     <span class="status-dot" aria-hidden="true"></span>
-
-                    <span>Mercado conectado</span>
-
+                    <span id="marketStatusText">Fonte: CoinGecko · BRL</span>
                 </div>
-
                 <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar tema claro"
                     aria-pressed="false">
                     <i class="bi bi-sun" aria-hidden="true"></i>
                     <span>Tema claro</span>
                 </button>
             </div>
-
         </div>
-
     </header>
 
-
-
-    <!-- =====================================================
-         MAIN
-    ====================================================== -->
-
-    <main class="container py-4" id="main-content">
-
-
-        <!-- =================================================
-             HERO
-        ================================================== -->
-
+    <main class="page-shell" id="main-content">
         <section class="hero-section reveal" aria-labelledby="hero-title">
-
-            <span class="small-label">
-                MONITORAMENTO DO MERCADO
-            </span>
-
-
-            <h1 id="hero-title">
-
-                Acompanhe o mercado
-
-                <span>cripto.</span>
-
-            </h1>
-
-
-            <p>
-
-                Monitore preços, variações e movimentações
-                das principais criptomoedas em um único lugar.
-
-            </p>
-
+            <span class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> INTELIGÊNCIA DE MERCADO</span>
+            <h1 id="hero-title">O mercado cripto,<br><span>com clareza.</span></h1>
+            <p>Preços e movimentos das principais criptomoedas, organizados para uma leitura rápida e objetiva.</p>
         </section>
-
-
 
         <div class="dashboard-overview">
             <section class="dashboard-panel search-panel reveal" aria-labelledby="search-title">
                 <div class="section-header">
                     <div>
-                        <span class="small-label">PESQUISA</span>
-                        <h2 id="search-title">Encontre uma moeda</h2>
+                        <span class="section-kicker">PESQUISA</span>
+                        <h2 id="search-title">Explore um ativo</h2>
                     </div>
+                    <span class="section-index">01</span>
                 </div>
-
                 <div class="search-container">
+                    <label for="cryptoSearch" class="visually-hidden">ID da criptomoeda no CoinGecko</label>
                     <div class="search-box">
                         <i class="bi bi-search" aria-hidden="true"></i>
-                        <label for="cryptoSearch" class="visually-hidden">Pesquisar criptomoeda</label>
-                        <input type="search" id="cryptoSearch" placeholder="Ex.: bitcoin" autocomplete="off"
-                            spellcheck="false" aria-label="Pesquisar criptomoeda">
-                        <span class="search-shortcut" aria-hidden="true">/</span>
+                        <input type="search" id="cryptoSearch" placeholder="Busque por ID, ex.: bitcoin"
+                            autocomplete="off" spellcheck="false" aria-describedby="search-hint">
+                        <kbd class="search-shortcut" aria-hidden="true">/</kbd>
                     </div>
+                    <p class="search-hint" id="search-hint">Use o identificador do ativo no CoinGecko. Pressione / para pesquisar.</p>
                 </div>
-
                 <section class="resultsSearch" id="ResultSearch" aria-live="polite"
-                    aria-label="Resultado da pesquisa"></section>
+                    aria-label="Resultado da pesquisa" aria-busy="false"></section>
             </section>
 
             <section class="dashboard-panel top-three-panel reveal" aria-labelledby="market-title">
                 <div class="section-header">
                     <div>
-                        <span class="small-label">MERCADO</span>
-                        <h2 id="market-title">Top 3 moedas</h2>
+                        <span class="section-kicker">POR VALOR DE MERCADO</span>
+                        <h2 id="market-title">Ativos em destaque</h2>
                     </div>
+                    <span class="section-index">02</span>
                 </div>
-
-                <div id="rankingtop3" class="row g-3 mt-2" aria-live="polite">
-                    <div class="col-12">
-                        <div class="text-center py-4">
-                            <div class="spinner-border" role="status">
-                                <span class="visually-hidden">Carregando moedas...</span>
-                            </div>
-                        </div>
-                    </div>
+                <div id="rankingtop3" class="top-three-list" aria-live="polite" aria-busy="true">
+                    <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando ativos…</p>
                 </div>
             </section>
         </div>
 
-
-
-
-        <!-- =================================================
-             GRAPH
-        ================================================== -->
-
-        <section class="news-section mt-5 reveal" aria-labelledby="news-title">
-
-            <div class="section-header news-heading">
-
-                <div>
-
-                    <span class="small-label">
-                        FIQUE POR DENTRO
-                    </span>
-
-                    <h2 id="news-title">
-                        Notícias do mercado
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- CHART -->
-            <div id="lastNews" class="row g-3 mt-2" aria-live="polite" aria-busy="true">
-                <!-- Notícias serão inseridas aqui -->
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             MARKET TABLE
-        ================================================== -->
-
-        <section class="table-section mt-5 reveal" aria-labelledby="overview-title">
-
+        <section class="news-section content-section reveal" aria-labelledby="news-title">
             <div class="section-header">
-
                 <div>
-
-                    <span class="small-label">
-                        VISÃO GERAL
-                    </span>
-
-                    <h2 id="overview-title">
-                        Mercado
-                    </h2>
-
+                    <span class="section-kicker">CONTEXTO</span>
+                    <h2 id="news-title">Notícias do mercado</h2>
                 </div>
-
+                <span class="section-index">03</span>
             </div>
-
-
-
-            <!-- TABELA -->
-
-            <div class="crypto-table">
-
-
-                <!-- CABEÇALHO -->
-
-                <div class="table-head" role="row">
-
-                    <span>#</span>
-
-                    <span>Moeda</span>
-
-                    <span>Preço</span>
-
-                    <span>24h</span>
-
-                    <span>Market Cap</span>
-
-                </div>
-
-
-
-                <!--
-                    O rankingTop100() do api.js
-                    coloca as criptomoedas aqui.
-                -->
-
-                <div id="ranking100" aria-live="polite">
-
-                    <!-- Loading -->
-
-                    <div class="text-center py-4">
-
-                        <div class="spinner-border" role="status">
-
-                            <span class="visually-hidden">
-                                Carregando mercado...
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <details class="ranking-more" id="rankingMore">
-                    <summary>Ver mais moedas</summary>
-                    <div id="rankingRest" aria-live="polite"></div>
-                </details>
-
+            <div id="lastNews" class="news-grid" aria-live="polite" aria-busy="true">
+                <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando notícias…</p>
             </div>
-
         </section>
 
+        <section class="table-section content-section reveal" aria-labelledby="overview-title">
+            <div class="section-header">
+                <div>
+                    <span class="section-kicker">DADOS DE MERCADO</span>
+                    <h2 id="overview-title">Maiores ativos</h2>
+                </div>
+                <span class="table-note">Ordenado por capitalização</span>
+            </div>
+
+            <div class="crypto-table" id="marketTable" role="table" aria-label="Ranking das 100 maiores criptomoedas"
+                aria-busy="true">
+                <div class="table-head" role="row">
+                    <span role="columnheader">#</span>
+                    <span role="columnheader">Ativo</span>
+                    <span role="columnheader">Preço (BRL)</span>
+                    <span role="columnheader">Variação 24h</span>
+                    <span role="columnheader">Capitalização</span>
+                </div>
+                <div id="ranking100" role="rowgroup" aria-live="polite">
+                    <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando ranking…</p>
+                </div>
+            </div>
+            <details class="ranking-more" id="rankingMore" hidden>
+                <summary>Ver mais moedas</summary>
+                <div class="crypto-table ranking-expanded" role="table"
+                    aria-label="Posições restantes do ranking de criptomoedas">
+                    <div class="table-head" role="row">
+                        <span role="columnheader">#</span>
+                        <span role="columnheader">Ativo</span>
+                        <span role="columnheader">Preço (BRL)</span>
+                        <span role="columnheader">Variação 24h</span>
+                        <span role="columnheader">Capitalização</span>
+                    </div>
+                    <div id="rankingRest" role="rowgroup" aria-live="polite"></div>
+                </div>
+            </details>
+        </section>
     </main>
 
-
-
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
-    <footer class="container text-center py-5">
-
-        <div class="footer-line" aria-hidden="true"></div>
-
-
-        <span>
-            AVOCRYPTO © 2026 — Monitoramento de mercado
-        </span>
-
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <a href="../index.html" class="footer-brand">avocrypto<span>.</span></a>
+            <span>Dados de mercado sujeitos a atraso. Para fins informativos.</span>
+            <span>© 2026 Avocrypto</span>
+        </div>
     </footer>
 
-
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
-
+    <script src="../script.js"></script>
     <script src="../jS/api.js"></script>
-
-    <script src="../jS/animations.js"></script>
-
     <script src="../jS/news.js"></script>
 
 
