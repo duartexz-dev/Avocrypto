@@ -1,11 +1,24 @@
+let moeda = "brl";
+
 /* =========================================================
    TOP 3
 ========================================================= */
 
+function formatarMoeda(valor, maximumFractionDigits = 2) {
+    const locale = moeda === "brl" ? "pt-BR" : "en-US";
+
+    return new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency: moeda.toUpperCase(),
+        minimumFractionDigits: Math.min(2, maximumFractionDigits),
+        maximumFractionDigits
+    }).format(valor);
+}
+
 async function rankingTop3() {
 
     const resposta = await fetch(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=3&page=1"
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${moeda}&order=market_cap_desc&per_page=3&page=1`
     );
 
     const dados = await resposta.json();
@@ -68,11 +81,7 @@ async function rankingTop3() {
 
                     <div class="price">
 
-                        R$
-                        ${crypto.current_price.toLocaleString("pt-BR", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 8
-        })}
+                        ${formatarMoeda(crypto.current_price, 8)}
 
                     </div>
 
@@ -99,8 +108,6 @@ async function rankingTop3() {
         `;
     });
 }
-
-
 
 async function buscarBitcoin() {
 
@@ -136,22 +143,22 @@ async function buscarBitcoin() {
     const imagem = dados.image?.small;
 
     const marketCap =
-        dados.market_data.market_cap.brl;
+        dados.market_data.market_cap[moeda];
 
     const volume =
-        dados.market_data.total_volume.brl;
+        dados.market_data.total_volume[moeda];
 
     const variacao24h =
         dados.market_data.price_change_percentage_24h;
 
     const maxima24h =
-        dados.market_data.high_24h.brl;
+        dados.market_data.high_24h[moeda];
 
     const minima24h =
-        dados.market_data.low_24h.brl;
+        dados.market_data.low_24h[moeda];
 
     const preco =
-        dados.market_data.current_price.brl;
+        dados.market_data.current_price[moeda];
 
 
     const dadosCrypto = `
@@ -162,17 +169,17 @@ async function buscarBitcoin() {
 
         Símbolo: ${simbolo}
 
-        Preço: R$ ${preco}
+        Preço: ${formatarMoeda(preco, 8)}
 
-        Market Cap: R$ ${marketCap}
+        Market Cap: ${formatarMoeda(marketCap, 0)}
 
-        Volume 24h: R$ ${volume}
+        Volume 24h: ${formatarMoeda(volume, 0)}
 
         Variação 24h: ${variacao24h}%
 
-        Máxima 24h: R$ ${maxima24h}
+        Máxima 24h: ${formatarMoeda(maxima24h, 8)}
 
-        Mínima 24h: R$ ${minima24h}
+        Mínima 24h: ${formatarMoeda(minima24h, 8)}
 
     `;
 
@@ -222,11 +229,7 @@ async function buscarBitcoin() {
 
                     <strong>
 
-                        R$
-                        ${preco.toLocaleString("pt-BR", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 8
-    })}
+                        ${formatarMoeda(preco, 8)}
 
                     </strong>
 
@@ -256,8 +259,7 @@ async function buscarBitcoin() {
                     </span>
 
                     <strong>
-                        R$
-                        ${marketCap.toLocaleString("pt-BR")}
+                        ${formatarMoeda(marketCap, 0)}
                     </strong>
 
                 </div>
@@ -270,8 +272,7 @@ async function buscarBitcoin() {
                     </span>
 
                     <strong>
-                        R$
-                        ${volume.toLocaleString("pt-BR")}
+                        ${formatarMoeda(volume, 0)}
                     </strong>
 
                 </div>
@@ -284,8 +285,7 @@ async function buscarBitcoin() {
                     </span>
 
                     <strong>
-                        R$
-                        ${maxima24h.toLocaleString("pt-BR")}
+                        ${formatarMoeda(maxima24h, 8)}
                     </strong>
 
                 </div>
@@ -298,8 +298,7 @@ async function buscarBitcoin() {
                     </span>
 
                     <strong>
-                        R$
-                        ${minima24h.toLocaleString("pt-BR")}
+                        ${formatarMoeda(minima24h, 8)}
                     </strong>
 
                 </div>
@@ -333,7 +332,7 @@ input.addEventListener("keydown", (event) => {
 async function rankingTop100() {
 
     const resposta = await fetch(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=100&page=1"
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${moeda}&order=market_cap_desc&per_page=100&page=1`
     );
 
 
@@ -404,11 +403,7 @@ async function rankingTop100() {
 
                 <strong>
 
-                    R$
-                    ${crypto.current_price.toLocaleString("pt-BR", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 8
-        })}
+                    ${formatarMoeda(crypto.current_price, 8)}
 
                 </strong>
 
@@ -430,8 +425,7 @@ async function rankingTop100() {
 
                 <strong>
 
-                    R$
-                    ${crypto.market_cap.toLocaleString("pt-BR")}
+                    ${formatarMoeda(crypto.market_cap, 0)}
 
                 </strong>
 
@@ -445,6 +439,48 @@ async function rankingTop100() {
 
 
 
-rankingTop100();
+const currencyToggle = document.getElementById("currencyToggle");
+const currencyCodes = document.querySelectorAll("[data-currency-code]");
+const marketStatusText = document.getElementById("marketStatusText");
 
+try {
+    const savedCurrency = localStorage.getItem("avocrypto-currency");
+    if (savedCurrency === "brl" || savedCurrency === "usd") {
+        moeda = savedCurrency;
+    }
+} catch (error) {
+    console.warn("A preferência de moeda não pôde ser carregada.", error);
+}
+
+function atualizarControlesMoeda() {
+    const nextCurrency = moeda === "brl" ? "usd" : "brl";
+    currencyToggle.querySelector("span").textContent = nextCurrency.toUpperCase();
+    currencyToggle.setAttribute("aria-label", `Trocar para ${nextCurrency.toUpperCase()}`);
+    marketStatusText.textContent = `Fonte: CoinGecko · ${moeda.toUpperCase()}`;
+    currencyCodes.forEach((element) => {
+        element.textContent = moeda.toUpperCase();
+    });
+}
+
+atualizarControlesMoeda();
+
+currencyToggle.addEventListener("click", () => {
+    moeda = moeda === "brl" ? "usd" : "brl";
+    atualizarControlesMoeda();
+
+    try {
+        localStorage.setItem("avocrypto-currency", moeda);
+    } catch (error) {
+        console.warn("A preferência de moeda não pôde ser salva.", error);
+    }
+
+    rankingTop100();
+    rankingTop3();
+
+    if (document.getElementById("cryptoSearch").value.trim()) {
+        buscarBitcoin();
+    }
+});
+
+rankingTop100();
 rankingTop3();

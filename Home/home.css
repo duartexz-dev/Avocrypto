@@ -265,7 +265,8 @@ a {
   background: var(--accent);
 }
 
-.theme-toggle {
+.theme-toggle,
+.currency-toggle {
   min-height: 38px;
   display: inline-flex;
   align-items: center;
@@ -285,12 +286,14 @@ a {
     color var(--duration-fast) ease;
 }
 
-.theme-toggle i {
+.theme-toggle i,
+.currency-toggle i {
   color: var(--accent);
   font-size: 14px;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover,
+.currency-toggle:hover {
   border-color: var(--accent);
   color: var(--text);
 }
@@ -1171,12 +1174,14 @@ a {
     font-size: 10px;
   }
 
-  .theme-toggle {
+  .theme-toggle,
+  .currency-toggle {
     width: 38px;
     padding: 0;
   }
 
-  .theme-toggle span {
+  .theme-toggle span,
+  .currency-toggle span {
     position: absolute;
     width: 1px;
     height: 1px;
