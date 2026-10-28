@@ -22,7 +22,8 @@
   --radius-control: 9px;
   --radius-card: 14px;
   --radius-panel: 18px;
-  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans:
+    "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
   --weight-regular: 400;
   --weight-medium: 500;
@@ -86,7 +87,9 @@ body {
   font-size: 15px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  transition: background-color var(--duration-theme) ease, color var(--duration-theme) ease;
+  transition:
+    background-color var(--duration-theme) ease,
+    color var(--duration-theme) ease;
 }
 
 button,
@@ -148,7 +151,9 @@ a {
   z-index: 2;
   border-bottom: 1px solid var(--border);
   background: var(--bg);
-  transition: background-color var(--duration-theme) ease, border-color var(--duration-theme) ease;
+  transition:
+    background-color var(--duration-theme) ease,
+    border-color var(--duration-theme) ease;
 }
 
 .header-inner {
@@ -179,7 +184,11 @@ a {
   overflow: hidden;
   border: 1px solid rgba(139, 214, 60, 0.42);
   border-radius: 48% 48% 45% 45%;
-  background: linear-gradient(145deg, rgba(139, 214, 60, 0.15), rgba(139, 214, 60, 0.035));
+  background: linear-gradient(
+    145deg,
+    rgba(139, 214, 60, 0.15),
+    rgba(139, 214, 60, 0.035)
+  );
   transform: rotate(4deg);
 }
 
@@ -270,7 +279,10 @@ a {
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color var(--duration-fast) ease, border-color var(--duration-fast) ease, color var(--duration-fast) ease;
+  transition:
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    color var(--duration-fast) ease;
 }
 
 .theme-toggle i {
@@ -348,7 +360,9 @@ a {
   border-radius: var(--radius-panel);
   background: var(--surface);
   box-shadow: var(--shadow-panel);
-  transition: background-color var(--duration-theme) ease, border-color var(--duration-theme) ease;
+  transition:
+    background-color var(--duration-theme) ease,
+    border-color var(--duration-theme) ease;
 }
 
 .dashboard-panel {
@@ -391,7 +405,10 @@ a {
   border: 1px solid var(--border-strong);
   border-radius: 11px;
   background: var(--surface-soft);
-  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease, background-color var(--duration-theme) ease;
+  transition:
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease,
+    background-color var(--duration-theme) ease;
 }
 
 .search-box:focus-within {
@@ -503,7 +520,10 @@ a {
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
   background: var(--surface-soft);
-  transition: transform var(--duration-fast) var(--ease-out), border-color var(--duration-fast) ease, background-color var(--duration-theme) ease;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) ease,
+    background-color var(--duration-theme) ease;
 }
 
 .crypto-card:hover {
@@ -591,7 +611,10 @@ a {
   background: transparent;
   color: var(--text-subtle);
   cursor: pointer;
-  transition: color var(--duration-fast) ease, background-color var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  transition:
+    color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease;
 }
 
 .star-button:hover,
@@ -791,7 +814,10 @@ a {
   background: var(--surface-soft);
   animation: news-enter 360ms var(--ease-out) both;
   animation-delay: var(--news-delay, 0ms);
-  transition: transform var(--duration-fast) var(--ease-out), border-color var(--duration-fast) ease, background-color var(--duration-theme) ease;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) ease,
+    background-color var(--duration-theme) ease;
 }
 
 .news-card:hover {
@@ -909,7 +935,9 @@ a {
 .table-head,
 .table-row {
   display: grid;
-  grid-template-columns: 44px minmax(170px, 1.7fr) minmax(135px, 1fr) minmax(120px, 0.9fr) minmax(145px, 1.15fr);
+  grid-template-columns:
+    44px minmax(170px, 1.7fr) minmax(135px, 1fr) minmax(120px, 0.9fr)
+    minmax(145px, 1.15fr);
   align-items: center;
   gap: 14px;
 }
@@ -1026,7 +1054,9 @@ a {
 .site-footer {
   border-top: 1px solid var(--border);
   background: var(--surface-soft);
-  transition: background-color var(--duration-theme) ease, border-color var(--duration-theme) ease;
+  transition:
+    background-color var(--duration-theme) ease,
+    border-color var(--duration-theme) ease;
 }
 
 .footer-inner {
@@ -1051,7 +1081,9 @@ a {
 .motion-enabled .reveal {
   opacity: 0;
   transform: translateY(12px);
-  transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
+  transition:
+    opacity 420ms var(--ease-out),
+    transform 420ms var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -1061,16 +1093,26 @@ a {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes status-pulse {
-  50% { opacity: 0.45; }
+  50% {
+    opacity: 0.45;
+  }
 }
 
 @keyframes news-enter {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 900px) {

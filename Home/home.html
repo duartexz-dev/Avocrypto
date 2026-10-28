@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html data-theme="light" lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -14,12 +14,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="home.css">
     <script>
         try {
-            document.documentElement.dataset.theme =
-                localStorage.getItem("avocrypto-theme") === "light" ? "light" : "dark";
+            const savedTheme = localStorage.getItem("avocrypto-theme");
+            if (savedTheme === "light" || savedTheme === "dark") {
+                document.documentElement.dataset.theme = savedTheme;
+            }
         } catch (error) {
             console.warn("A preferência de tema não pôde ser carregada.", error);
         }
@@ -44,10 +48,10 @@
                     <span class="status-dot" aria-hidden="true"></span>
                     <span id="marketStatusText">Fonte: CoinGecko · BRL</span>
                 </div>
-                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar tema claro"
-                    aria-pressed="false">
-                    <i class="bi bi-sun" aria-hidden="true"></i>
-                    <span>Tema claro</span>
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar tema escuro"
+                    aria-pressed="true">
+                    <i class="bi bi-moon-stars" aria-hidden="true"></i>
+                    <span>Tema escuro</span>
                 </button>
             </div>
         </div>
@@ -77,10 +81,11 @@
                             autocomplete="off" spellcheck="false" aria-describedby="search-hint">
                         <kbd class="search-shortcut" aria-hidden="true">/</kbd>
                     </div>
-                    <p class="search-hint" id="search-hint">Use o identificador do ativo no CoinGecko. Pressione / para pesquisar.</p>
+                    <p class="search-hint" id="search-hint">Use o identificador do ativo no CoinGecko. Pressione / para
+                        pesquisar.</p>
                 </div>
-                <section class="resultsSearch" id="ResultSearch" aria-live="polite"
-                    aria-label="Resultado da pesquisa" aria-busy="false"></section>
+                <section class="resultsSearch" id="ResultSearch" aria-live="polite" aria-label="Resultado da pesquisa"
+                    aria-busy="false"></section>
             </section>
 
             <section class="dashboard-panel top-three-panel reveal" aria-labelledby="market-title">
@@ -92,7 +97,8 @@
                     <span class="section-index">02</span>
                 </div>
                 <div id="rankingtop3" class="top-three-list" aria-live="polite" aria-busy="true">
-                    <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando ativos…</p>
+                    <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando
+                        ativos…</p>
                 </div>
             </section>
         </div>
@@ -106,7 +112,8 @@
                 <span class="section-index">03</span>
             </div>
             <div id="lastNews" class="news-grid" aria-live="polite" aria-busy="true">
-                <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando notícias…</p>
+                <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando notícias…
+                </p>
             </div>
         </section>
 
@@ -129,7 +136,8 @@
                     <span role="columnheader">Capitalização</span>
                 </div>
                 <div id="ranking100" role="rowgroup" aria-live="polite">
-                    <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando ranking…</p>
+                    <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando
+                        ranking…</p>
                 </div>
             </div>
             <details class="ranking-more" id="rankingMore" hidden>
@@ -160,6 +168,7 @@
     <script src="../script.js"></script>
     <script src="../jS/api.js"></script>
     <script src="../jS/news.js"></script>
+    <script src="../jS/theme.js"></script>
 
 
 </body>

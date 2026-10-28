@@ -3,7 +3,6 @@
 ========================================================= */
 
 async function rankingTop3() {
-    console.log("API.JS → TOP 3 iniciou");
 
     const resposta = await fetch(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=3&page=1"
@@ -58,10 +57,9 @@ async function rankingTop3() {
                             class="star-button"
                             type="button"
                             aria-label="Adicionar ${crypto.name} aos favoritos"
-                            aria-pressed="false"
                         >
 
-                             <i class="bi bi-star" aria-hidden="true"></i>
+                            <i class="bi bi-star"></i>
 
                         </button>
 
@@ -104,11 +102,8 @@ async function rankingTop3() {
 
 
 
-/* =========================================================
-   BUSCAR CRIPTOMOEDA
-========================================================= */
-
 async function buscarBitcoin() {
+
     let result = document.getElementById("ResultSearch");
 
     let nameCrypto = document
@@ -120,8 +115,7 @@ async function buscarBitcoin() {
 
     if (!nameCrypto) {
 
-        result
-            .innerHTML = "Sem resultados , verifique se o nome da cripto está certo!"
+        result.innerHTML = "";
 
         return;
     }
@@ -135,7 +129,7 @@ async function buscarBitcoin() {
     const dados = await resposta.json();
 
 
-
+    const id = dados.id;
     const nome = dados.name;
     const simbolo = dados.symbol;
 
@@ -160,7 +154,30 @@ async function buscarBitcoin() {
         dados.market_data.current_price.brl;
 
 
+    const dadosCrypto = `
 
+        ID: ${id}
+
+        Nome: ${nome}
+
+        Símbolo: ${simbolo}
+
+        Preço: R$ ${preco}
+
+        Market Cap: R$ ${marketCap}
+
+        Volume 24h: R$ ${volume}
+
+        Variação 24h: ${variacao24h}%
+
+        Máxima 24h: R$ ${maxima24h}
+
+        Mínima 24h: R$ ${minima24h}
+
+    `;
+
+
+    console.log(dadosCrypto);
 
 
     result.innerHTML = `
@@ -298,10 +315,6 @@ async function buscarBitcoin() {
 
 
 
-/* =========================================================
-   ENTER NA PESQUISA
-========================================================= */
-
 let input = document.getElementById("cryptoSearch");
 
 
@@ -317,60 +330,121 @@ input.addEventListener("keydown", (event) => {
 
 
 
-/* =========================================================
-   TOP 100
-========================================================= */
-
 async function rankingTop100() {
+
     const resposta = await fetch(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=100&page=1"
     );
+
+
     const dados = await resposta.json();
-    const ranking100 = document.getElementById("ranking100");
-    const rankingRest = document.getElementById("rankingRest");
-    const rankingMore = document.getElementById("rankingMore");
-    const moreSummary = rankingMore?.querySelector("summary");
 
-    if (!ranking100 || !rankingRest || !rankingMore || !moreSummary) return;
 
-    const renderRow = (crypto, index) => {
+    let ranking100 =
+        document.getElementById("ranking100");
+
+
+    ranking100.innerHTML = "";
+
+
+    dados.forEach((crypto, index) => {
+
         const variacao =
             crypto.price_change_percentage_24h ?? 0;
 
-        return `
+
+        ranking100.innerHTML += `
+
             <div class="table-row">
-                <span class="rank">${index + 1}</span>
-                <div class="table-coin">
-                    <div class="coin-icon small">
-                        <img src="${crypto.image}" alt="Logo da ${crypto.name}" loading="lazy">
-                    </div>
-                    <div>
-                        <strong>${crypto.name}</strong>
-                        <small>${crypto.symbol.toUpperCase()}</small>
-                    </div>
-                </div>
-                <strong>R$ ${crypto.current_price.toLocaleString("pt-BR", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 8
-                })}</strong>
-                <span class="${variacao >= 0 ? "positive" : "negative"}">
-                    ${variacao >= 0 ? "↑" : "↓"} ${Math.abs(variacao).toFixed(2)}%
+
+
+                <!-- POSIÇÃO -->
+
+                <span class="rank">
+
+                    ${index + 1}
+
                 </span>
-                <strong>R$ ${crypto.market_cap.toLocaleString("pt-BR")}</strong>
+
+
+
+                <!-- MOEDA -->
+
+                <div class="table-coin">
+
+
+                    <div class="coin-icon small">
+
+                        <img
+                            src="${crypto.image}"
+                            alt="Logo da ${crypto.name}"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            ${crypto.name}
+                        </strong>
+
+                        <small>
+                            ${crypto.symbol.toUpperCase()}
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PREÇO -->
+
+                <strong>
+
+                    R$
+                    ${crypto.current_price.toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 8
+        })}
+
+                </strong>
+
+
+
+                <!-- 24H -->
+
+                <span class="${variacao >= 0 ? "positive" : "negative"}">
+
+                    ${variacao >= 0 ? "↑" : "↓"}
+
+                    ${Math.abs(variacao).toFixed(2)}%
+
+                </span>
+
+
+
+                <!-- MARKET CAP -->
+
+                <strong>
+
+                    R$
+                    ${crypto.market_cap.toLocaleString("pt-BR")}
+
+                </strong>
+
+
             </div>
+
         `;
-    };
-
-    const topTen = dados.slice(0, 10);
-    const remainingCoins = dados.slice(10);
-
-    ranking100.innerHTML = topTen.map((crypto, index) => renderRow(crypto, index)).join("");
-    rankingRest.innerHTML = remainingCoins
-        .map((crypto, index) => renderRow(crypto, index + 10))
-        .join("");
-    rankingMore.hidden = remainingCoins.length === 0;
-    moreSummary.textContent = `Ver mais ${remainingCoins.length} moedas`;
+    });
 }
 
+
+
+
 rankingTop100();
+
 rankingTop3();

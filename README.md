@@ -58,11 +58,9 @@ npx serve .
 Avocrypto/
 ├── Home/
 ├── jS/
-│   ├── animations.js
 │   ├── api.js
 │   ├── login.js
-│   ├── news.js
-│   └── system.js
+│   └── news.js
 ├── index.html
 ├── script.js
 ├── style.css
