@@ -17,18 +17,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="home.css">
-    <script>
-        try {
-            const savedTheme = localStorage.getItem("avocrypto-theme");
-            if (savedTheme === "light" || savedTheme === "dark") {
-                document.documentElement.dataset.theme = savedTheme;
-            }
-        } catch (error) {
-            console.warn("A preferência de tema não pôde ser carregada.", error);
-        }
-    </script>
-
+    <link rel="stylesheet" href="../styles/tokens.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
 </head>
 
 
@@ -169,11 +160,10 @@
         </div>
     </footer>
 
-    <script src="../script.js"></script>
-    <script src="../jS/api.js"></script>
-    <script src="../jS/news.js"></script>
-    <script src="../jS/theme.js"></script>
-
+    <script src="../js/ui/animations.js"></script>
+    <script src="../js/api/coingecko.js"></script>
+    <script src="../js/features/news.js"></script>
+    <script src="../js/ui/theme.js"></script>
 
 </body>
 

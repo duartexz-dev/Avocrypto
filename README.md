@@ -1,109 +1,95 @@
-# 🥑 Avocrypto
+# Avocrypto
 
-Monitoramento de criptomoedas direto pelo navegador — busca, rankings e dados de mercado em tempo real usando a **CoinGecko API**.
+Avocrypto é uma demonstração estática para consultar preços e movimentações de criptomoedas. A página inicial apresenta o fluxo de acesso demonstrativo; o painel reúne pesquisa, rankings e notícias.
 
-[![Demo](https://img.shields.io/badge/demo-online-7fa858?style=flat-square)](https://duartexz-dev.github.io/Avocrypto/)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white)
-
-**[➜ Acessar o projeto](https://duartexz-dev.github.io/Avocrypto/)**
-
-<!--
-  Coloque aqui um screenshot ou GIF curto do app rodando.
-  Exemplo: ![preview](./docs/preview.png)
-  É a melhor forma de mostrar o resultado sem precisar abrir o link.
--->
-
-## Sobre o projeto
-
-O Avocrypto permite consultar e acompanhar informações de diferentes criptomoedas através de uma interface simples e responsiva.
-
-Foi desenvolvido como projeto de estudo para praticar integração com APIs, manipulação de dados e construção de interfaces — transformando os dados de uma API externa em algo fácil de visualizar.
+[Abrir Avocrypto no GitHub Pages](https://duartexz-dev.github.io/Avocrypto/)
 
 ## Funcionalidades
 
-- Busca por criptomoedas
-- Ranking das principais moedas e top 3 em destaque
-- Preço atual, variação de 24h, máxima e mínima
-- Market cap e volume de negociação
-- Interface responsiva, com animações e efeitos visuais
+- Pesquisa de ativos pelo identificador usado pela CoinGecko.
+- Ranking das 100 maiores criptomoedas por capitalização e três ativos em destaque.
+- Três ativos em destaque, cotação, variação em 24 horas, capitalização, volume, máxima e mínima quando disponíveis.
+- Alternância entre BRL e USD, com preferência salva no navegador.
+- Favoritos do top 3 salvos localmente.
+- Notícias da fonte externa atual.
+- Temas claro e escuro, preferência persistida em `avocrypto-theme`.
+- Layout responsivo, animações de entrada e atalho `/` para focar a pesquisa.
+- Página inicial com fluxo demonstrativo, sem autenticação real.
 
-## Como rodar localmente
+## Tecnologias
 
-O projeto não tem build — é HTML/CSS/JS puro. Para rodar:
+- HTML5, CSS3 e JavaScript puro.
+- CoinGecko API para dados de mercado.
+- Fonte atual de notícias: `https://cryptocurrency.cv/api/news`.
+- Bootstrap Icons e Google Fonts para recursos visuais.
+- GitHub Actions e GitHub Pages para publicação estática.
+
+## Estrutura
+
+```text
+Avocrypto/
+├── .github/
+│   └── workflows/
+│   └── pages.yml
+├── js/
+│   ├── api/
+│   │   ├── coingecko.js
+│   ├── features/
+│   │   └── news.js
+│   ├── pages/
+│   │   └── auth.js
+│   └── ui/
+│       ├── animations.js
+│       └── theme.js
+├── pages/
+│   └── dashboard.html
+├── styles/
+│   ├── tokens.css
+│   ├── base.css
+│   ├── auth.css
+│   └── dashboard.css
+├── .gitignore
+├── index.html
+└── README.md
+```
+
+Não há imagens locais utilizadas no projeto; os ícones dos ativos vêm da resposta da CoinGecko.
+
+## Executar localmente
+
+Abra o projeto por um servidor HTTP em vez de usar `file://`.
 
 ```bash
 git clone https://github.com/duartexz-dev/Avocrypto.git
 cd Avocrypto
-```
-
-Depois, abra o `index.html` diretamente no navegador, ou sirva a pasta com um servidor local (recomendado, evita bloqueios de CORS do navegador em `file://`):
-
-```bash
 npx serve .
-# ou, com a extensão Live Server do VS Code
 ```
 
-## Tecnologias
+Também é possível usar a extensão Live Server no VS Code. Acesse a URL local apresentada pelo servidor e entre no painel pelo formulário demonstrativo.
 
-- HTML5 / CSS3 / JavaScript
-- Bootstrap
-- [CoinGecko API](https://www.coingecko.com/en/api)
+## Organização e fluxo dos módulos
 
-## Estrutura
+- `index.html` carrega os scripts de animação e o fluxo demonstrativo de acesso.
+- `pages/dashboard.html` carrega os scripts de animação, mercado, notícias e tema.
+- `js/api/coingecko.js` contém o script existente de pesquisa e dados de mercado, incluindo a chamada à CoinGecko e a renderização dos rankings.
+- `js/features/news.js` contém a chamada à fonte de notícias e a apresentação dos resultados.
+- `js/pages/auth.js` contém o fluxo de acesso demonstrativo; `js/ui/theme.js` mantém a preferência `avocrypto-theme`.
+- `js/ui/animations.js` contém as animações existentes do projeto.
+- Os arquivos foram realocados e renomeados sem converter os scripts para módulos nem reescrever sua lógica.
+- `styles/tokens.css` centraliza tokens e temas; `styles/base.css` contém estilos comuns; `styles/auth.css` e `styles/dashboard.css` mantêm as regras próprias de cada tela.
 
-```
-Avocrypto/
-├── Home/
-├── jS/
-│   ├── api.js
-│   ├── login.js
-│   └── news.js
-├── index.html
-├── script.js
-├── style.css
-└── README.md
-```
+## Limitações conhecidas
 
-## Objetivo
+- As chamadas para serviços externos partem diretamente do navegador. A CoinGecko ou a fonte de notícias podem impor limites de uso, falhar ou ser bloqueadas por CORS conforme o serviço e o ambiente. O projeto não inclui proxy nem backend.
+- A tela inicial é somente um fluxo demonstrativo, não protege o dashboard e não deve ser apresentada como autenticação real. O fluxo JavaScript anterior ainda persiste `senhaUser` e `emailUser` no `localStorage`; não use credenciais reais. A remoção desse comportamento exige alteração de lógica, que não faz parte da reorganização estrutural.
+- Preços e notícias dependem da disponibilidade, formato e atraso das fontes externas.
 
-O principal objetivo do Avocrypto foi colocar em prática conceitos de desenvolvimento web:
+## Publicação no GitHub Pages
 
-- Consumo de APIs e requisições com `fetch()`
-- Manipulação do DOM e exibição dinâmica de dados
-- Organização de JavaScript em múltiplos módulos
-- Criação de interfaces responsivas
-- Animações para melhorar a experiência do usuário
+O workflow `.github/workflows/pages.yml` publica os arquivos estáticos em cada push para `main` e também pode ser iniciado manualmente. Não há etapa de build.
 
-## Limitação conhecida — CORS
-
-Atualmente, o navegador faz as requisições diretamente para a CoinGecko:
-
-```
-Avocrypto → JavaScript → CoinGecko API
-```
-
-Dependendo da configuração da API e do ambiente em que o projeto roda, o navegador pode bloquear essas requisições por política de CORS. A solução correta seria adicionar uma camada intermediária:
-
-```
-Avocrypto → Backend / Proxy → CoinGecko API
-```
-
-**Por que ainda não foi resolvido:** o objetivo principal do projeto foi aprendizado e prática. Implementar uma infraestrutura intermediária adicionaria custo e complexidade fora do escopo inicial. Por isso o Avocrypto permanece como projeto de estudo — documentando também essa limitação real e o caminho para resolvê-la numa versão futura.
-
-## Aprendizados
-
-```
-JavaScript → Fetch API → APIs externas → Manipulação do DOM
-→ Dados dinâmicos → Responsividade → Animações → Problemas de CORS
-```
-
-## Status
-
-Projeto de estudo em desenvolvimento contínuo. Próximas melhorias devem focar na arquitetura de comunicação com a API (resolver CORS) e em refinar a experiência do usuário.
+Para habilitar a publicação no repositório, abra **Settings → Pages** e selecione **GitHub Actions** como fonte de build e deploy. A configuração da fonte é feita nas configurações do GitHub e não é alterada por este repositório. Como o projeto é publicado em `/Avocrypto/`, os caminhos internos são relativos às páginas e continuam funcionando no subdiretório do GitHub Pages.
 
 ---
 
-Desenvolvido por [Arthur Duarte](https://github.com/duartexz-dev)
+Desenvolvido por [Arthur Duarte](https://github.com/duartexz-dev).
