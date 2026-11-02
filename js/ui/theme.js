@@ -2,6 +2,15 @@ const themeToggle = document.getElementById("themeToggle");
 const rootElement = document.documentElement;
 const themeColor = document.querySelector('meta[name="theme-color"]');
 
+try {
+    const savedTheme = localStorage.getItem("avocrypto-theme");
+    if (savedTheme === "light" || savedTheme === "dark") {
+        rootElement.dataset.theme = savedTheme;
+    }
+} catch (error) {
+    console.warn("A preferência de tema não pôde ser carregada.", error);
+}
+
 function updateThemeButton(theme) {
     const isLight = theme === "light";
     const icon = themeToggle.querySelector("i");
@@ -13,7 +22,7 @@ function updateThemeButton(theme) {
     themeToggle.setAttribute("aria-pressed", String(isLight));
 
     if (themeColor) {
-        themeColor.content = isLight ? "#f4f6f0" : "#101410";
+        themeColor.content = isLight ? "#F1F5EF" : "#080B09";
     }
 }
 

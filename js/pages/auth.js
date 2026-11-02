@@ -1,90 +1,51 @@
-const senhaSalva = localStorage.getItem("senhaUser");
-const emailSalvo = localStorage.getItem("emailUser");
-if (senhaSalva && emailSalvo) {
+(() => {
+    const form = document.getElementById("form-login");
+    const username = document.getElementById("demo-user");
+    const password = document.getElementById("demo-password");
+    const feedback = document.getElementById("login-feedback");
+    const submit = form?.querySelector('button[type="submit"]');
 
+    if (!form || !username || !password || !feedback || !submit) return;
 
-    loading.style.display = "flex"
+    const demoUser = "banana";
+    const demoPassword = "123";
+    let redirectTimer;
 
-    setTimeout(() => {
+    const clearFeedback = () => {
+        feedback.textContent = "";
+        feedback.removeAttribute("data-state");
+        username.removeAttribute("aria-invalid");
+        password.removeAttribute("aria-invalid");
+    };
 
-        loading.style.display = "none"
+    form.addEventListener("input", clearFeedback);
 
-        alertGood.style.display = "flex"
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (submit.disabled) return;
 
-    }, 4000);
+        const valid = username.value === demoUser && password.value === demoPassword;
+        if (!valid) {
+            feedback.textContent = "Dados incorretos. Use as credenciais fictícias exibidas acima.";
+            username.setAttribute("aria-invalid", String(username.value !== demoUser));
+            password.setAttribute("aria-invalid", String(password.value !== demoPassword));
+            (username.value !== demoUser ? username : password).focus();
+            return;
+        }
 
-    setTimeout(() => {
+        feedback.textContent = "Acesso de demonstração confirmado. Abrindo o painel…";
+        feedback.dataset.state = "success";
+        submit.disabled = true;
+        submit.classList.add("is-loading");
+        submit.querySelector(".button-label").textContent = "Abrindo painel";
+        submit.setAttribute("aria-busy", "true");
 
-        alertGood.style.display = "flex"
+        redirectTimer = window.setTimeout(() => {
+            window.location.assign("./pages/dashboard.html");
+        }, 550);
+    });
 
-        setTimeout(() => {
-            window.location.href = "./pages/dashboard.html";
-        }, 1000);
-    }, 6000)
-}
-
-
-function criarConta() {
-
-    let senha = document.getElementById("password").value
-
-    let email = document.getElementById("email").value
-
-    let alertBad = document.getElementById("alertBad")
-
-    let alertGood = document.getElementById("alertGood")
-
-    let aviso = document.getElementById("avisoRuim")
-
-    let loading = document.getElementById("loading")
-
-    if (!email || !senha) {
-
-        aviso.innerHTML = `Preencha todas as informações por favor.`
-
-        alertBad.style.display = "flex"
-
-    } else if (senha.length < 8) {
-
-        aviso.innerHTML = `A senha precisa ter mais de 8 caractéres.`
-
-        alertBad.style.display = "flex"
-
-        return;
-
-    } else if (!email.endsWith("@gmail.com")) {
-
-        aviso.innerHTML = `Coloque no final do email , @gmail.com.`
-
-        alertBad.style.display = "flex"
-
-        return;
-
-    } else {
-
-        loading.style.display = "flex"
-
-        setTimeout(() => {
-
-            loading.style.display = "none"
-
-            alertGood.style.display = "flex"
-
-        }, 4000);
-
-        setTimeout(() => {
-
-            alertGood.style.display = "flex"
-
-            setTimeout(() => {
-                window.location.href = "./Home/home.html";
-            }, 1000);
-        }, 6000)
-
-        localStorage.setItem("senhaUser", senha)
-
-        localStorage.setItem("emailUser", email)
-    }
-
-
-}
+    window.addEventListener("pagehide", () => {
+        if (redirectTimer) window.clearTimeout(redirectTimer);
+    }, { once: true });
+})();

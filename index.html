@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#101410">
-    <meta name="description" content="Acesse a demonstração do painel de mercado Avocrypto.">
-    <title>Avocrypto — Acesso à demonstração</title>
+    <meta name="theme-color" content="#080B09">
+    <meta name="description" content="Acesse a demonstração do Avocrypto e acompanhe preços e variações de criptomoedas nas últimas 24 horas.">
+    <title>Avocrypto — Uma leitura clara do mercado</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,95 +13,107 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./styles/tokens.css">
     <link rel="stylesheet" href="./styles/base.css">
-    <link rel="stylesheet" href="./styles/auth.css">
+    <link rel="stylesheet" href="./styles/auth-redesign.css">
 </head>
 <body class="login-page">
-    <main class="login-layout">
+    <a class="skip-link" href="#demo-access">Pular para o acesso à demonstração</a>
+    <main class="login-layout login-container">
         <section class="login-intro" aria-labelledby="brand-title">
-            <a class="brand" href="./index.html" aria-label="Avocrypto — início">
-                <span class="brand-mark" aria-hidden="true"><span></span></span>
-                <span class="brand-name">avocrypto<span>.</span></span>
-            </a>
+            <header class="intro-topline">
+                <a class="brand" href="./index.html" aria-label="Avocrypto — início">
+                    <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+                        <path d="M7 25.5 19.8 5l13.3 20.5L20 35 7 25.5Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                        <path d="m12.2 24.7 7.7-12.4 8.2 12.4-8.1 6-7.8-6Z" fill="currentColor"/>
+                        <path d="m19.9 12.3.1 18.4" stroke="#080B09" stroke-width="1.5"/>
+                    </svg>
+                    <span class="brand-name">avo<span>crypto</span><b>.</b></span>
+                </a>
+                <span class="intro-stamp"><span aria-hidden="true"></span> LEITURA DE MERCADO · 24H</span>
+            </header>
+
             <div class="intro-copy">
-                <span class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> INTELIGÊNCIA DE MERCADO</span>
-                <h1 id="brand-title">Decisões melhores<br>começam com <span>clareza.</span></h1>
-                <p>Uma leitura direta dos ativos digitais. Acompanhe preços, variações e contexto em um só lugar.</p>
+                <span class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> UM PAINEL PARA ENTENDER O MOVIMENTO</span>
+                <h1 id="brand-title">Cripto,<br>sem <em>ruído.</em></h1>
+                <p>Preços, variações das últimas 24 horas, notícias e ranking — cada informação no seu lugar, com leitura direta para quem está começando.</p>
             </div>
-            <div class="intro-footnote">
-                <span class="intro-rule" aria-hidden="true"></span>
-                <span>Dados informativos. Não constituem recomendação de investimento.</span>
+
+            <div class="intro-bottom">
+                <div class="market-ribbon" aria-label="O painel acompanha três frentes de informação">
+                    <span><b>01</b> Preço</span>
+                    <i aria-hidden="true"></i>
+                    <span><b>02</b> Variação</span>
+                    <i aria-hidden="true"></i>
+                    <span><b>03</b> Contexto</span>
+                </div>
+                <p class="intro-disclaimer"><span aria-hidden="true">↗</span> Dados informativos. Não constituem recomendação de investimento.</p>
             </div>
+            <div class="intro-art" aria-hidden="true">
+                <span class="art-block art-block-one"></span>
+                <span class="art-block art-block-two"></span>
+                <span class="art-line"></span>
+                <span class="art-label">LEITURA<br>EM CAMADAS</span>
+            </div>
+            <span class="intro-index" aria-hidden="true">AV / 01</span>
         </section>
 
-        <section class="login-panel" aria-labelledby="login-title">
+        <section class="login-panel" id="demo-access" tabindex="-1" aria-labelledby="login-title">
+            <div class="panel-topline">
+                <span class="section-kicker">AMBIENTE DE DEMONSTRAÇÃO</span>
+                <span class="panel-counter">01 <i aria-hidden="true"></i> 02</span>
+            </div>
             <div class="login-header">
-                <span class="section-kicker">ACESSO AO PRODUTO</span>
-                <h2 id="login-title">Entre na demonstração</h2>
-                <p>Use um e-mail e uma senha de teste para abrir o painel.</p>
+                <span class="login-glyph" aria-hidden="true"><i class="bi bi-arrow-down-right"></i></span>
+                <h2 id="login-title">Entre no painel.</h2>
+                <p>Use os dados fictícios abaixo para experimentar o acesso.</p>
             </div>
 
-            <div class="demo-notice" role="note">
-                <i class="bi bi-info-circle" aria-hidden="true"></i>
-                <p>Este protótipo não tem autenticação segura. Os dados ficam somente neste navegador. Não use uma senha real.</p>
+            <aside class="demo-notice" role="note" aria-label="Aviso importante sobre esta demonstração">
+                <i class="bi bi-shield-exclamation" aria-hidden="true"></i>
+                <div>
+                    <strong>Não é autenticação real.</strong>
+                    <p>Os valores só validam esta interação no navegador. Nenhuma credencial é enviada ou guardada.</p>
+                </div>
+            </aside>
+
+            <div class="demo-credentials" aria-label="Credenciais fictícias de demonstração">
+                <span>USUÁRIO <strong>banana</strong></span>
+                <span>SENHA <strong>123</strong></span>
             </div>
 
-            <form id="form-login" novalidate>
+            <form id="form-login" class="demo-form" novalidate>
                 <div class="input-group-custom">
-                    <label class="input-label" for="email">E-mail</label>
+                    <label class="input-label" for="demo-user">Usuário</label>
                     <div class="input-wrapper">
-                        <i class="bi bi-envelope" aria-hidden="true"></i>
-                        <input type="email" id="email" class="form-control-avo" placeholder="voce@exemplo.com"
-                            autocomplete="email" inputmode="email" required aria-describedby="email-error">
+                        <i class="bi bi-person" aria-hidden="true"></i>
+                        <input class="form-control-avo" id="demo-user" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="login-feedback">
                     </div>
-                    <span class="field-error" id="email-error"></span>
                 </div>
-
                 <div class="input-group-custom">
-                    <label class="input-label" for="password">Senha de demonstração</label>
+                    <label class="input-label" for="demo-password">Senha de demonstração</label>
                     <div class="input-wrapper">
-                        <i class="bi bi-lock" aria-hidden="true"></i>
-                        <input type="password" id="password" class="form-control-avo" placeholder="Mínimo de 8 caracteres"
-                            autocomplete="current-password" required minlength="8" aria-describedby="password-error">
+                        <i class="bi bi-key" aria-hidden="true"></i>
+                        <input class="form-control-avo" id="demo-password" type="password" autocomplete="new-password" aria-describedby="login-feedback">
                     </div>
-                    <span class="field-error" id="password-error"></span>
                 </div>
-
-                <button type="submit" class="btn-avo-primary" id="loginSubmit">
-                    <span>Acessar painel de demonstração</span>
+                <p class="login-feedback" id="login-feedback" role="status" aria-live="polite"></p>
+                <button class="btn-avo-primary" type="submit">
+                    <span class="button-label">Entrar na demonstração</span>
                     <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
                 </button>
-                <p class="form-footnote">Sem conta, recuperação de senha ou biometria neste protótipo.</p>
             </form>
 
-            <div class="login-bottom">
-                <span class="brand-mini">AVO<span>CRYPTO</span></span>
-                <span>Projeto de demonstração</span>
+            <div class="direct-access">
+                <span>Prefere pular esta etapa?</span>
+                <a href="./pages/dashboard.html">Abrir o dashboard direto <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
             </div>
+            <footer class="login-bottom">
+                <span class="brand-mini">AVO<span>CRYPTO</span> <b>·</b> 2026</span>
+                <span>Interface demonstrativa</span>
+            </footer>
         </section>
     </main>
 
-    <div id="alertBad" class="alert-badge alert-error" role="alert" aria-live="assertive" hidden>
-        <span class="alert-icon" aria-hidden="true">!</span>
-        <div class="alert-content">
-            <strong>Não foi possível continuar</strong>
-            <span id="avisoRuim"></span>
-        </div>
-        <button type="button" class="alert-dismiss" aria-label="Fechar mensagem de erro">&times;</button>
-    </div>
-
-    <div id="alertGood" class="alert-badge alert-success" role="status" aria-live="polite" hidden>
-        <span class="alert-icon" aria-hidden="true">✓</span>
-        <div class="alert-content">
-            <strong>Acesso de demonstração liberado</strong>
-            <span>Abrindo o painel…</span>
-        </div>
-    </div>
-
-    <div id="loading" class="loading-overlay" role="status" aria-live="polite" hidden>
-        <span class="loading-indicator" aria-hidden="true"></span>
-        <span>Preparando a demonstração…</span>
-    </div>
-
+    <script src="./js/cleanup-legacy-credentials.js"></script>
     <script src="./js/ui/animations.js"></script>
     <script src="./js/pages/auth.js"></script>
 </body>

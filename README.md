@@ -1,6 +1,6 @@
 # Avocrypto
 
-Avocrypto é uma demonstração estática para consultar preços e movimentações de criptomoedas. A página inicial apresenta o fluxo de acesso demonstrativo; o painel reúne pesquisa, rankings e notícias.
+Avocrypto é uma demonstração estática para consultar preços e movimentações de criptomoedas. A página inicial oferece acesso direto ao painel, que reúne pesquisa, rankings e notícias.
 
 [Abrir Avocrypto no GitHub Pages](https://duartexz-dev.github.io/Avocrypto/)
 
@@ -14,7 +14,8 @@ Avocrypto é uma demonstração estática para consultar preços e movimentaçõ
 - Notícias da fonte externa atual.
 - Temas claro e escuro, preferência persistida em `avocrypto-theme`.
 - Layout responsivo, animações de entrada e atalho `/` para focar a pesquisa.
-- Página inicial com fluxo demonstrativo, sem autenticação real.
+- Login apenas demonstrativo com usuário `banana` e senha `123`; esses valores são fictícios e validados localmente no navegador.
+- Link direto ao dashboard sem login. A interface não protege o painel nem representa autenticação real.
 
 ## Tecnologias
 
@@ -38,6 +39,7 @@ Avocrypto/
 │   │   └── news.js
 │   ├── pages/
 │   │   └── auth.js
+│   ├── cleanup-legacy-credentials.js
 │   └── ui/
 │       ├── animations.js
 │       └── theme.js
@@ -47,13 +49,15 @@ Avocrypto/
 │   ├── tokens.css
 │   ├── base.css
 │   ├── auth.css
-│   └── dashboard.css
+│   ├── auth-redesign.css
+│   ├── dashboard.css
+│   └── dashboard-redesign.css
 ├── .gitignore
 ├── index.html
 └── README.md
 ```
 
-Não há imagens locais utilizadas no projeto; os ícones dos ativos vêm da resposta da CoinGecko.
+A marca geométrica é SVG inline original; os ícones dos ativos vêm da resposta da CoinGecko. Não foram adicionadas imagens remotas.
 
 ## Executar localmente
 
@@ -65,23 +69,25 @@ cd Avocrypto
 npx serve .
 ```
 
-Também é possível usar a extensão Live Server no VS Code. Acesse a URL local apresentada pelo servidor e entre no painel pelo formulário demonstrativo.
+Também é possível usar a extensão Live Server no VS Code. Acesse a URL local apresentada pelo servidor e abra o painel pelo link visível na página inicial.
 
 ## Organização e fluxo dos módulos
 
-- `index.html` carrega os scripts de animação e o fluxo demonstrativo de acesso.
-- `pages/dashboard.html` carrega os scripts de animação, mercado, notícias e tema.
+- `index.html` carrega as animações, o formulário local de demonstração e o link de acesso direto ao painel.
+- O formulário da página inicial aceita somente usuário `banana` e senha `123`, exibe feedback e abre o dashboard após uma breve confirmação. A validação fica em `js/pages/auth.js`; não envia nem persiste os valores. Essas credenciais são exemplos públicos, não são um mecanismo de segurança.
+- `pages/dashboard.html` carrega a limpeza legada, animações, mercado, notícias e tema.
+- `js/cleanup-legacy-credentials.js` tenta remover as chaves de credenciais legadas do `localStorage` nas duas páginas; a limpeza é de melhor esforço e pode ser impedida pelas permissões do navegador.
 - `js/api/coingecko.js` contém o script existente de pesquisa e dados de mercado, incluindo a chamada à CoinGecko e a renderização dos rankings.
 - `js/features/news.js` contém a chamada à fonte de notícias e a apresentação dos resultados.
-- `js/pages/auth.js` contém o fluxo de acesso demonstrativo; `js/ui/theme.js` mantém a preferência `avocrypto-theme`.
+- `js/ui/theme.js` mantém a preferência `avocrypto-theme`.
 - `js/ui/animations.js` contém as animações existentes do projeto.
 - Os arquivos foram realocados e renomeados sem converter os scripts para módulos nem reescrever sua lógica.
-- `styles/tokens.css` centraliza tokens e temas; `styles/base.css` contém estilos comuns; `styles/auth.css` e `styles/dashboard.css` mantêm as regras próprias de cada tela.
+- `styles/tokens.css` centraliza tokens e temas; `styles/base.css` contém estilos comuns; `styles/auth-redesign.css` e `styles/dashboard-redesign.css` são folhas autônomas das páginas. `styles/auth.css` e `styles/dashboard.css` permanecem no repositório, mas não são carregadas.
 
 ## Limitações conhecidas
 
 - As chamadas para serviços externos partem diretamente do navegador. A CoinGecko ou a fonte de notícias podem impor limites de uso, falhar ou ser bloqueadas por CORS conforme o serviço e o ambiente. O projeto não inclui proxy nem backend.
-- A tela inicial é somente um fluxo demonstrativo, não protege o dashboard e não deve ser apresentada como autenticação real. O fluxo JavaScript anterior ainda persiste `senhaUser` e `emailUser` no `localStorage`; não use credenciais reais. A remoção desse comportamento exige alteração de lógica, que não faz parte da reorganização estrutural.
+- A aplicação é pública e estática: o formulário de demonstração aceita apenas `banana` / `123` no navegador, sem enviar, armazenar ou registrar esses valores. Não há autenticação real, e o dashboard pode ser acessado diretamente; nunca use credenciais reais. A remoção de chaves de credenciais legadas do `localStorage` é uma tentativa de melhor esforço; o navegador pode bloquear esse acesso.
 - Preços e notícias dependem da disponibilidade, formato e atraso das fontes externas.
 
 ## Publicação no GitHub Pages
@@ -120,7 +126,7 @@ Abra este repositório no VS Code, escolha o agente **Design Orchestrator** no s
 
 ### Arquitetura e delegação
 
-Os perfis usam arquivos Markdown com frontmatter YAML em `.github/agents/`, o local de workspace documentado pelo VS Code. O Orchestrator restringe a lista de subagentes autorizados por `agents` e recebe a ferramenta `agent`; os trabalhadores recebem apenas as ferramentas necessárias ao papel. A execução depende da disponibilidade e habilitação de **Run Subagent** (`agent/runSubagent`) no harness **Local** do VS Code. Se esse recurso não estiver habilitado/disponível, a delegação não é automática: o Orchestrator deve declarar a limitação e fornecer a transferência de tarefa, sem fingir que outro agente executou o trabalho. Handoffs sugeridos trocam o agente ativo; não substituem a execução de subagentes.
+Os perfis usam arquivos Markdown com frontmatter YAML em `.github/agents/`, o local de workspace documentado pelo VS Code. O Orchestrator restringe a lista de subagentes autorizados por `agents` e recebe as ferramentas `agent` e `web`; os oito designers também recebem o alias `web`, enquanto QA/Repair e Design Security Auditor mantêm as ferramentas atuais sem acesso web. A disponibilidade efetiva de navegação depende do harness e das ferramentas que ele expõe; o alias não garante acesso, consulta automática nem integração com um serviço externo. Quando disponível e pertinente, `web` pode consultar MOTIONSITES.AI e 60fps.design como referências de motion/interações, e CTA.gallery e Unsection para chamadas de ação, seções e padrões visuais. Essas fontes são opcionais: não se deve exigir consulta, baixar ou usar assets, copiar código/design literalmente ou transformá-las em dependências. A inspiração deve ser traduzida para padrões existentes no repositório, respeitando a identidade e a acessibilidade aprovadas; o especialista informa apenas as fontes que realmente abriu e distingue consulta do que implementou. A execução depende da disponibilidade e habilitação de **Run Subagent** (`agent/runSubagent`) no harness **Local** do VS Code. Se esse recurso não estiver habilitado/disponível, a delegação não é automática: o Orchestrator deve declarar a limitação e fornecer a transferência de tarefa, sem fingir que outro agente executou o trabalho. Handoffs sugeridos trocam o agente ativo; não substituem a execução de subagentes.
 
 Fluxo: conversa e aprovação → Design Brief → um especialista selecionado → QA/Repair → auditoria independente → reparo e reauditoria dos achados, se necessário → entrega com evidências e limitações. O auditor não pode editar; o Orchestrator encaminha seus achados ao QA. A execução só é serial: não delegue trabalhos concorrentes sobre os mesmos arquivos.
 

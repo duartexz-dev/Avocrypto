@@ -1,39 +1,33 @@
 <!DOCTYPE html>
-<html data-theme="light" lang="pt-BR">
-
+<html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Acompanhe preços, variações das últimas 24 horas, notícias e ranking de criptomoedas no Avocrypto.">
+    <meta name="theme-color" content="#080B09">
+    <title>Avocrypto — Painel de mercado</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description" content="AVOCRYPTO — Monitoramento de preços e movimentações do mercado de criptomoedas.">
-
-    <meta name="theme-color" content="#101410">
-    <title>Avocrypto — Inteligência de mercado</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../styles/tokens.css">
     <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/dashboard-redesign.css">
 </head>
-
-
-<body>
-
+<body class="dashboard-page">
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
 
     <header class="site-header">
         <div class="header-inner">
             <a href="../index.html" class="brand" aria-label="Avocrypto — tela inicial">
-                <span class="brand-mark" aria-hidden="true"><span></span></span>
-                <span class="brand-name">avocrypto<span>.</span></span>
+                <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+                    <path d="M7 25.5 19.8 5l13.3 20.5L20 35 7 25.5Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="m12.2 24.7 7.7-12.4 8.2 12.4-8.1 6-7.8-6Z" fill="currentColor"/>
+                    <path d="m19.9 12.3.1 18.4" stroke="#080B09" stroke-width="1.5"/>
+                </svg>
+                <span class="brand-name">avo<span>crypto</span><b>.</b></span>
             </a>
-
             <div class="header-actions">
                 <div class="market-status" id="marketStatus" data-state="source">
                     <span class="status-dot" aria-hidden="true"></span>
@@ -43,102 +37,90 @@
                     <i class="bi bi-currency-exchange" aria-hidden="true"></i>
                     <span>USD</span>
                 </button>
-                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar tema escuro"
-                    aria-pressed="true">
-                    <i class="bi bi-moon-stars" aria-hidden="true"></i>
-                    <span>Tema escuro</span>
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar tema claro" aria-pressed="false">
+                    <i class="bi bi-sun" aria-hidden="true"></i>
+                    <span>Tema claro</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <main class="page-shell" id="main-content">
+    <main class="page-shell" id="main-content" tabindex="-1">
         <section class="hero-section reveal" aria-labelledby="hero-title">
-            <span class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> INTELIGÊNCIA DE MERCADO</span>
-            <h1 id="hero-title">O mercado cripto,<br><span>com clareza.</span></h1>
-            <p>Preços e movimentos das principais criptomoedas, organizados para uma leitura rápida e objetiva.</p>
+            <div class="hero-copy">
+                <span class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> OBSERVATÓRIO CRIPTO · PAINEL 01</span>
+                <h1 id="hero-title">Veja o que<br>se move<span>.</span></h1>
+                <p>Uma leitura organizada dos preços de cripto e de suas mudanças nas últimas 24 horas. Sem perder o contexto no caminho.</p>
+            </div>
+            <aside class="hero-window" aria-label="Janela de leitura: últimas 24 horas">
+                <span class="window-label">JANELA DE LEITURA</span>
+                <strong>24<span>h</span></strong>
+                <span class="window-rule" aria-hidden="true"></span>
+                <p>Variação recente<br>em primeiro plano.</p>
+                <span class="window-index" aria-hidden="true">01 / 24</span>
+            </aside>
+            <div class="hero-decoration" aria-hidden="true">
+                <span class="hero-orbit"></span>
+                <span class="hero-shape"></span>
+                <span class="hero-decoration-label">SINAL<br>VISUAL</span>
+            </div>
         </section>
 
-        <div class="dashboard-overview">
-            <section class="dashboard-panel search-panel reveal" aria-labelledby="search-title">
-                <div class="section-header">
-                    <div>
-                        <span class="section-kicker">PESQUISA</span>
-                        <h2 id="search-title">Explore um ativo</h2>
-                    </div>
-                    <span class="section-index">01</span>
+        <section class="search-panel reveal" aria-labelledby="search-title">
+            <div class="search-heading">
+                <span class="section-index">01 <i aria-hidden="true">/</i> ENCONTRAR</span>
+                <h2 id="search-title">Procure um ativo.</h2>
+                <p>Digite o identificador usado no CoinGecko para consultar preço e variação.</p>
+            </div>
+            <div class="search-container">
+                <label for="cryptoSearch" class="visually-hidden">Identificador da criptomoeda no CoinGecko</label>
+                <div class="search-box">
+                    <i class="bi bi-search" aria-hidden="true"></i>
+                    <input type="search" id="cryptoSearch" placeholder="Experimente: bitcoin" autocomplete="off" spellcheck="false" aria-describedby="search-hint">
+                    <kbd class="search-shortcut" aria-hidden="true">/</kbd>
                 </div>
-                <div class="search-container">
-                    <label for="cryptoSearch" class="visually-hidden">ID da criptomoeda no CoinGecko</label>
-                    <div class="search-box">
-                        <i class="bi bi-search" aria-hidden="true"></i>
-                        <input type="search" id="cryptoSearch" placeholder="Busque por ID, ex.: bitcoin"
-                            autocomplete="off" spellcheck="false" aria-describedby="search-hint">
-                        <kbd class="search-shortcut" aria-hidden="true">/</kbd>
-                    </div>
-                    <p class="search-hint" id="search-hint">Use o identificador do ativo no CoinGecko. Pressione / para
-                        pesquisar.</p>
-                </div>
-                <section class="resultsSearch" id="ResultSearch" aria-live="polite" aria-label="Resultado da pesquisa"
-                    aria-busy="false"></section>
-            </section>
+                <p class="search-hint" id="search-hint">Digite um ID como bitcoin. Pressione / para focar a busca ou Enter para consultar.</p>
+            </div>
+            <section class="resultsSearch" id="ResultSearch" aria-live="polite" aria-label="Resultado da pesquisa" aria-busy="false"></section>
+            <span class="search-number" aria-hidden="true">A</span>
+        </section>
 
-            <section class="dashboard-panel top-three-panel reveal" aria-labelledby="market-title">
-                <div class="section-header">
-                    <div>
-                        <span class="section-kicker">POR VALOR DE MERCADO</span>
-                        <h2 id="market-title">Ativos em destaque</h2>
-                    </div>
-                    <span class="section-index">02</span>
+        <section class="assets-section reveal" aria-labelledby="market-title">
+            <div class="section-heading-row">
+                <div>
+                    <span class="section-index">02 <i aria-hidden="true">/</i> PRIMEIRO PLANO</span>
+                    <h2 id="market-title">Em destaque<span>:</span></h2>
                 </div>
-                <div id="rankingtop3" class="top-three-list" aria-live="polite" aria-busy="true">
-                    <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando
-                        ativos…</p>
-                </div>
-            </section>
-        </div>
+                <p>Três ativos por capitalização<br><span>com variação de 24 horas</span></p>
+            </div>
+            <div id="rankingtop3" class="top-three-list" aria-live="polite">
+                <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando ativos…</p>
+            </div>
+        </section>
 
         <section class="news-section content-section reveal" aria-labelledby="news-title">
-            <div class="section-header">
+            <div class="news-heading">
                 <div>
-                    <span class="section-kicker">CONTEXTO</span>
-                    <h2 id="news-title">Notícias do mercado</h2>
+                    <span class="section-index">03 <i aria-hidden="true">/</i> CONTEXTO</span>
+                    <h2 id="news-title">O que está<br><em>acontecendo.</em></h2>
                 </div>
-                <span class="section-index">03</span>
+                <p>Notícias para ampliar a leitura do mercado. Consulte a publicação original para mais informações.</p>
             </div>
             <div id="lastNews" class="news-grid" aria-live="polite" aria-busy="true">
-                <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando notícias…
-                </p>
+                <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando notícias…</p>
             </div>
         </section>
 
         <section class="table-section content-section reveal" aria-labelledby="overview-title">
-            <div class="section-header">
+            <div class="table-heading">
                 <div>
-                    <span class="section-kicker">DADOS DE MERCADO</span>
-                    <h2 id="overview-title">Maiores ativos</h2>
+                    <span class="section-index">04 <i aria-hidden="true">/</i> VISÃO GERAL</span>
+                    <h2 id="overview-title">Ranking de mercado<span>.</span></h2>
                 </div>
-                <span class="table-note">Ordenado por capitalização</span>
+                <p class="table-note">Ordenado por capitalização<br><span>Dados sujeitos a atraso</span></p>
             </div>
-
-            <div class="crypto-table" id="marketTable" role="table" aria-label="Ranking das 100 maiores criptomoedas"
-                aria-busy="true">
-                <div class="table-head" role="row">
-                    <span role="columnheader">#</span>
-                    <span role="columnheader">Ativo</span>
-                    <span role="columnheader">Preço (<span data-currency-code>BRL</span>)</span>
-                    <span role="columnheader">Variação 24h</span>
-                    <span role="columnheader">Capitalização</span>
-                </div>
-                <div id="ranking100" role="rowgroup" aria-live="polite">
-                    <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando
-                        ranking…</p>
-                </div>
-            </div>
-            <details class="ranking-more" id="rankingMore" hidden>
-                <summary>Ver mais moedas</summary>
-                <div class="crypto-table ranking-expanded" role="table"
-                    aria-label="Posições restantes do ranking de criptomoedas">
+            <div class="table-scroll">
+                <div class="crypto-table" id="marketTable" role="table" aria-label="Ranking das 100 maiores criptomoedas">
                     <div class="table-head" role="row">
                         <span role="columnheader">#</span>
                         <span role="columnheader">Ativo</span>
@@ -146,25 +128,30 @@
                         <span role="columnheader">Variação 24h</span>
                         <span role="columnheader">Capitalização</span>
                     </div>
-                    <div id="rankingRest" role="rowgroup" aria-live="polite"></div>
+                    <div id="ranking100" role="rowgroup" aria-live="polite">
+                        <p class="state-message"><span class="loading-indicator" aria-hidden="true"></span>Carregando ranking…</p>
+                    </div>
                 </div>
-            </details>
+                <aside class="ranking-more" id="rankingMore" aria-label="Limite desta consulta">
+                    <p class="ranking-limit-note">Esta visualização solicita até 100 ativos por consulta.</p>
+                    <div id="rankingRest" role="rowgroup" aria-live="polite"></div>
+                </aside>
+            </div>
         </section>
     </main>
 
     <footer class="site-footer">
         <div class="footer-inner">
-            <a href="../index.html" class="footer-brand">avocrypto<span>.</span></a>
-            <span>Dados de mercado sujeitos a atraso. Para fins informativos.</span>
+            <a href="../index.html" class="footer-brand">avo<span>crypto</span><b>.</b></a>
+            <span>Dados sujeitos a atraso · Conteúdo informativo, não é recomendação de investimento.</span>
             <span>© 2026 Avocrypto</span>
         </div>
     </footer>
 
+    <script src="../js/cleanup-legacy-credentials.js"></script>
     <script src="../js/ui/animations.js"></script>
     <script src="../js/api/coingecko.js"></script>
     <script src="../js/features/news.js"></script>
     <script src="../js/ui/theme.js"></script>
-
 </body>
-
 </html>

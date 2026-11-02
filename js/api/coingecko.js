@@ -1,5 +1,65 @@
 let moeda = "brl";
 
+const hostsImagemCoinGecko = new Set([
+    "coin-images.coingecko.com",
+    "assets.coingecko.com"
+]);
+
+function criarElemento(tag, className = "") {
+    const element = document.createElement(tag);
+    if (className) {
+        element.className = className;
+    }
+    return element;
+}
+
+function inserirTexto(parent, tag, className, value) {
+    const element = criarElemento(tag, className);
+    element.textContent = value == null ? "" : String(value);
+    parent.append(element);
+    return element;
+}
+
+function textoCoinGecko(value) {
+    return value == null ? "" : String(value);
+}
+
+function imagemCoinGecko(url, name, className = "", loading = null) {
+    const wrapper = criarElemento("div", className);
+    const image = document.createElement("img");
+    const label = textoCoinGecko(name);
+
+    image.alt = `Logo da ${label}`;
+    if (loading) {
+        image.loading = loading;
+    }
+
+    try {
+        const parsedUrl = new URL(url);
+        if (parsedUrl.protocol === "https:" && hostsImagemCoinGecko.has(parsedUrl.hostname)) {
+            image.src = parsedUrl.href;
+            wrapper.append(image);
+        }
+    } catch (error) {
+        // URL ausente ou inválida: mantém o espaço do ícone sem carregar origem externa.
+    }
+
+    return wrapper;
+}
+
+function numeroCoinGecko(value) {
+    const number = Number(value);
+    return Number.isFinite(number) ? number : 0;
+}
+
+function criarVariacao(value, className = "change", tagName = "span") {
+    const variation = numeroCoinGecko(value);
+    const classes = [className, variation >= 0 ? "positive" : "negative"].filter(Boolean);
+    const element = criarElemento(tagName, classes.join(" "));
+    element.textContent = `${variation >= 0 ? "↑" : "↓"} ${Math.abs(variation).toFixed(2)}%`;
+    return element;
+}
+
 /* =========================================================
    TOP 3
 ========================================================= */
@@ -12,7 +72,7 @@ function formatarMoeda(valor, maximumFractionDigits = 2) {
         currency: moeda.toUpperCase(),
         minimumFractionDigits: Math.min(2, maximumFractionDigits),
         maximumFractionDigits
-    }).format(valor);
+    }).format(numeroCoinGecko(valor));
 }
 
 async function rankingTop3() {
@@ -25,87 +85,39 @@ async function rankingTop3() {
 
     let ranking3 = document.getElementById("rankingtop3");
 
-    ranking3.innerHTML = "";
+    ranking3.replaceChildren();
 
     dados.forEach((crypto, index) => {
 
-        const variacao = crypto.price_change_percentage_24h ?? 0;
+        const name = textoCoinGecko(crypto.name);
+        const column = criarElemento("div", "col-12 col-md-6 col-xl-4");
+        const card = criarElemento("div", "crypto-card");
+        const cardTop = criarElemento("div", "card-top");
+        const coinInfo = criarElemento("div", "coin-info");
+        const coinDetails = criarElemento("div");
+        const favorite = criarElemento("button", "star-button");
+        const star = criarElemento("i", "bi bi-star");
 
-        ranking3.innerHTML += `
-
-            <div class="col-12 col-md-6 col-xl-4">
-
-                <div class="crypto-card">
-
-                    <div class="card-top">
-
-                        <div class="coin-info">
-
-                            <div class="coin-icon">
-
-                                <img
-                                    src="${crypto.image}"
-                                    alt="Logo da ${crypto.name}"
-                                    loading="lazy"
-                                >
-
-                            </div>
-
-                            <div>
-
-                                <h3>
-                                    ${crypto.name}
-                                </h3>
-
-                                <span>
-                                    ${crypto.symbol.toUpperCase()}
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <button
-                            class="star-button"
-                            type="button"
-                            aria-label="Adicionar ${crypto.name} aos favoritos"
-                        >
-
-                            <i class="bi bi-star"></i>
-
-                        </button>
-
-                    </div>
-
-
-                    <div class="price">
-
-                        ${formatarMoeda(crypto.current_price, 8)}
-
-                    </div>
-
-
-                    <div class="change ${variacao >= 0 ? "positive" : "negative"}">
-
-                        ${variacao >= 0 ? "↑" : "↓"}
-
-                        ${Math.abs(variacao).toFixed(2)}%
-
-                    </div>
-
-
-                    <div class="mini-chart">
-
-                        <div class="chart-line"></div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        `;
+        favorite.type = "button";
+        favorite.setAttribute("aria-label", `Adicionar ${name} aos favoritos`);
+        favorite.append(star);
+        coinInfo.append(
+            imagemCoinGecko(crypto.image, name, "coin-icon", "lazy"),
+            coinDetails
+        );
+        inserirTexto(coinDetails, "h3", "", name);
+        inserirTexto(coinDetails, "span", "", textoCoinGecko(crypto.symbol).toUpperCase());
+        cardTop.append(coinInfo, favorite);
+        const price = inserirTexto(card, "div", "price", formatarMoeda(crypto.current_price, 8));
+        card.append(
+            cardTop,
+            price,
+            criarVariacao(crypto.price_change_percentage_24h, "change", "div"),
+            criarElemento("div", "mini-chart")
+        );
+        card.lastElementChild.append(criarElemento("div", "chart-line"));
+        column.append(card);
+        ranking3.append(column);
     });
 }
 
@@ -122,7 +134,7 @@ async function buscarBitcoin() {
 
     if (!nameCrypto) {
 
-        result.innerHTML = "";
+        result.replaceChildren();
 
         return;
     }
@@ -136,9 +148,9 @@ async function buscarBitcoin() {
     const dados = await resposta.json();
 
 
-    const id = dados.id;
-    const nome = dados.name;
-    const simbolo = dados.symbol;
+    const id = textoCoinGecko(dados.id);
+    const nome = textoCoinGecko(dados.name);
+    const simbolo = textoCoinGecko(dados.symbol);
 
     const imagem = dados.image?.small;
 
@@ -149,7 +161,7 @@ async function buscarBitcoin() {
         dados.market_data.total_volume[moeda];
 
     const variacao24h =
-        dados.market_data.price_change_percentage_24h;
+        dados.market_data.price_change_percentage_24h ?? 0;
 
     const maxima24h =
         dados.market_data.high_24h[moeda];
@@ -187,128 +199,38 @@ async function buscarBitcoin() {
     console.log(dadosCrypto);
 
 
-    result.innerHTML = `
+    result.replaceChildren();
+    const cryptoResult = criarElemento("div", "crypto-result p-3");
+    const resultHeader = criarElemento("div", "d-flex align-items-center justify-content-between gap-3");
+    const tableCoin = criarElemento("div", "table-coin d-flex align-items-center gap-3");
+    const resultInfo = criarElemento("div", "crypto-result-info");
+    const resultPrice = criarElemento("div", "crypto-result-price");
+    const resultMeta = criarElemento("div", "crypto-result-meta");
 
-        <div class="crypto-result p-3">
+    tableCoin.append(imagemCoinGecko(imagem, nome, "coin-icon small"), resultInfo);
+    inserirTexto(resultInfo, "strong", "", nome);
+    inserirTexto(resultInfo, "small", "", simbolo);
+    resultPrice.append(
+        criarElemento("strong"),
+        criarVariacao(variacao24h, "", "small")
+    );
+    resultPrice.firstElementChild.textContent = formatarMoeda(preco, 8);
+    resultHeader.append(tableCoin, resultPrice);
 
-            <div class="d-flex align-items-center justify-content-between gap-3">
+    [
+        ["Market Cap", formatarMoeda(marketCap, 0)],
+        ["Volume 24h", formatarMoeda(volume, 0)],
+        ["Máxima 24h", formatarMoeda(maxima24h, 8)],
+        ["Mínima 24h", formatarMoeda(minima24h, 8)]
+    ].forEach(([label, value]) => {
+        const item = criarElemento("div");
+        inserirTexto(item, "span", "", label);
+        inserirTexto(item, "strong", "", value);
+        resultMeta.append(item);
+    });
 
-
-                <!-- MOEDA -->
-
-                <div class="table-coin d-flex align-items-center gap-3">
-
-                    <div class="coin-icon small">
-
-                        <img
-                            src="${imagem}"
-                            alt="Logo da ${nome}"
-                        >
-
-                    </div>
-
-
-                    <div class="crypto-result-info">
-
-                        <strong>
-                            ${nome}
-                        </strong>
-
-                        <small>
-                            ${simbolo}
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <!-- PREÇO -->
-
-                <div class="crypto-result-price">
-
-                    <strong>
-
-                        ${formatarMoeda(preco, 8)}
-
-                    </strong>
-
-
-                    <small class="${variacao24h >= 0 ? "positive" : "negative"}">
-
-                        ${variacao24h >= 0 ? "↑" : "↓"}
-
-                        ${Math.abs(variacao24h).toFixed(2)}%
-
-                    </small>
-
-                </div>
-
-            </div>
-
-
-            <!-- INFORMAÇÕES -->
-
-            <div class="crypto-result-meta">
-
-
-                <div>
-
-                    <span>
-                        Market Cap
-                    </span>
-
-                    <strong>
-                        ${formatarMoeda(marketCap, 0)}
-                    </strong>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Volume 24h
-                    </span>
-
-                    <strong>
-                        ${formatarMoeda(volume, 0)}
-                    </strong>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Máxima 24h
-                    </span>
-
-                    <strong>
-                        ${formatarMoeda(maxima24h, 8)}
-                    </strong>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Mínima 24h
-                    </span>
-
-                    <strong>
-                        ${formatarMoeda(minima24h, 8)}
-                    </strong>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-    `;
+    cryptoResult.append(resultHeader, resultMeta);
+    result.append(cryptoResult);
 
 }
 
@@ -316,6 +238,16 @@ async function buscarBitcoin() {
 
 let input = document.getElementById("cryptoSearch");
 
+document.addEventListener("keydown", (event) => {
+    const target = event.target;
+    const isEditing = target instanceof HTMLElement
+        && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
+
+    if (event.key === "/" && !isEditing && !event.altKey && !event.ctrlKey && !event.metaKey) {
+        event.preventDefault();
+        input.focus();
+    }
+});
 
 input.addEventListener("keydown", (event) => {
 
@@ -343,96 +275,31 @@ async function rankingTop100() {
         document.getElementById("ranking100");
 
 
-    ranking100.innerHTML = "";
+    ranking100.replaceChildren();
 
 
     dados.forEach((crypto, index) => {
 
-        const variacao =
-            crypto.price_change_percentage_24h ?? 0;
+        const name = textoCoinGecko(crypto.name);
+        const row = criarElemento("div", "table-row");
+        inserirTexto(row, "span", "rank", index + 1);
+        const coin = criarElemento("div", "table-coin");
+        const details = criarElemento("div");
 
-
-        ranking100.innerHTML += `
-
-            <div class="table-row">
-
-
-                <!-- POSIÇÃO -->
-
-                <span class="rank">
-
-                    ${index + 1}
-
-                </span>
-
-
-
-                <!-- MOEDA -->
-
-                <div class="table-coin">
-
-
-                    <div class="coin-icon small">
-
-                        <img
-                            src="${crypto.image}"
-                            alt="Logo da ${crypto.name}"
-                            loading="lazy"
-                        >
-
-                    </div>
-
-
-                    <div>
-
-                        <strong>
-                            ${crypto.name}
-                        </strong>
-
-                        <small>
-                            ${crypto.symbol.toUpperCase()}
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- PREÇO -->
-
-                <strong>
-
-                    ${formatarMoeda(crypto.current_price, 8)}
-
-                </strong>
-
-
-
-                <!-- 24H -->
-
-                <span class="${variacao >= 0 ? "positive" : "negative"}">
-
-                    ${variacao >= 0 ? "↑" : "↓"}
-
-                    ${Math.abs(variacao).toFixed(2)}%
-
-                </span>
-
-
-
-                <!-- MARKET CAP -->
-
-                <strong>
-
-                    ${formatarMoeda(crypto.market_cap, 0)}
-
-                </strong>
-
-
-            </div>
-
-        `;
+        coin.append(imagemCoinGecko(crypto.image, name, "coin-icon small", "lazy"), details);
+        inserirTexto(details, "strong", "", name);
+        inserirTexto(details, "small", "", textoCoinGecko(crypto.symbol).toUpperCase());
+        const price = criarElemento("strong");
+        price.textContent = formatarMoeda(crypto.current_price, 8);
+        const marketCap = criarElemento("strong");
+        marketCap.textContent = formatarMoeda(crypto.market_cap, 0);
+        row.append(
+            coin,
+            price,
+            criarVariacao(crypto.price_change_percentage_24h, ""),
+            marketCap
+        );
+        ranking100.append(row);
     });
 }
 

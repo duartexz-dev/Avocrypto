@@ -29,6 +29,10 @@ input {
 }
 
 button {
+  touch-action: manipulation;
+}
+
+button {
   color: inherit;
 }
 
@@ -37,7 +41,7 @@ a {
 }
 
 ::selection {
-  background: rgba(139, 214, 60, 0.26);
+  background: color-mix(in srgb, var(--highlight) 54%, transparent);
   color: var(--text);
 }
 
@@ -79,4 +83,19 @@ a {
 
 [hidden] {
   display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
 }
