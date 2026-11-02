@@ -93,3 +93,47 @@ Para habilitar a publicação no repositório, abra **Settings → Pages** e sel
 ---
 
 Desenvolvido por [Arthur Duarte](https://github.com/duartexz-dev).
+
+## Estúdio de design com agentes do Copilot
+
+O repositório também inclui perfis de agentes personalizados do GitHub Copilot em `.github/agents/`. Eles coordenam a criação e a revisão de interfaces sem alterar a aplicação até que exista um Design Brief aprovado. A implementação continua usando HTML, CSS e JavaScript puros, a estrutura existente e as funcionalidades do projeto.
+
+### Agentes e responsabilidades
+
+- **Design Orchestrator** (`design-orchestrator.agent.md`): único agente de entrada; conversa com o usuário, obtém aprovação da paleta e dos requisitos, organiza o Design Brief na conversa, escolhe especialistas e coordena o fluxo.
+- **Minimalism Designer**: reduz ruído sem remover conteúdo, organizando hierarquia, tipografia, espaço, tarefas e navegação.
+- **Maximalism Designer**: constrói uma gramática expressiva com composição, escala, cor e camadas, preservando leitura e prioridade das ações.
+- **Glassmorphism Designer**: organiza superfícies translúcidas e profundidade, com fundos, contraste e fallbacks legíveis sem desfoque.
+- **Neumorphism Designer**: aplica relevo tátil a componentes apropriados, com estados, bordas, foco e affordances distinguíveis.
+- **Neobrutalism Designer**: usa bordas, geometria, sombras e contraste expressivos em um sistema consistente e responsivo.
+- **Editorial Designer**: projeta arquitetura da informação, hierarquia tipográfica, grids, largura de leitura e ritmo para conteúdo.
+- **Motion Graphics Designer**: concebe sequências narrativas, tipografia ou ilustração animadas; mantém conteúdo estático e respeita movimento reduzido.
+- **Motion Designer**: projeta feedback causado por ações, estados, navegação e microinterações de interface — não narrativa gráfica.
+- **Design QA/Repair**: revisa evidências de funcionamento, integração, responsividade e acessibilidade; corrige defeitos confirmados sem redesenhar e limita-se a três ciclos.
+- **Design Security Auditor**: define um escopo de ameaça, verifica fluxos com evidências em modo somente leitura e declara limitações; não edita código.
+
+Os oito especialistas, QA e auditoria não são invocáveis diretamente pelo usuário. O Orchestrator seleciona um especialista principal e só solicita contribuição complementar quando o brief justificar; não executa todos em cada projeto.
+
+### Como usar
+
+Abra este repositório no VS Code, escolha o agente **Design Orchestrator** no seletor de agentes do Chat e inicie a conversa. Ele começa perguntando **“O que você deseja criar?”**, conduz a aprovação da identidade visual e coleta plataforma, tipo de produto, animações e direção visual antes de delegar. O Design Brief é apresentado e mantido na conversa para ser encaminhado integralmente aos especialistas. Não é salvo no repositório por padrão: o workflow de Pages publica o conteúdo do repositório, então persistir um brief pode expor informações. Se o usuário pedir para salvá-lo, o agente deve explicar esse risco e obter consentimento explícito antes de gravar ou substituir um arquivo.
+
+### Arquitetura e delegação
+
+Os perfis usam arquivos Markdown com frontmatter YAML em `.github/agents/`, o local de workspace documentado pelo VS Code. O Orchestrator restringe a lista de subagentes autorizados por `agents` e recebe a ferramenta `agent`; os trabalhadores recebem apenas as ferramentas necessárias ao papel. A execução depende da disponibilidade e habilitação de **Run Subagent** (`agent/runSubagent`) no harness **Local** do VS Code. Se esse recurso não estiver habilitado/disponível, a delegação não é automática: o Orchestrator deve declarar a limitação e fornecer a transferência de tarefa, sem fingir que outro agente executou o trabalho. Handoffs sugeridos trocam o agente ativo; não substituem a execução de subagentes.
+
+Fluxo: conversa e aprovação → Design Brief → um especialista selecionado → QA/Repair → auditoria independente → reparo e reauditoria dos achados, se necessário → entrega com evidências e limitações. O auditor não pode editar; o Orchestrator encaminha seus achados ao QA. A execução só é serial: não delegue trabalhos concorrentes sobre os mesmos arquivos.
+
+### Adicionar um especialista
+
+Crie um perfil `.agent.md` em `.github/agents/` com `name`, `description`, `target: vscode`, `user-invocable: false` e ferramentas mínimas. Instrua o agente a exigir o Design Brief completo, preservar a arquitetura existente, limitar mudanças ao seu escopo e relatar validações reais. Depois, acrescente o nome exato do perfil à lista `agents` do Orchestrator e atualize esta documentação. Não crie outro coordenador, permissões de delegação ou fluxo concorrente sem verificar o suporte oficial do harness.
+
+### Limitações
+
+Os perfis descrevem papéis; não fornecem por si só agentes em execução, execução em segundo plano ou garantia de aprovação humana. Subagentes do VS Code Local precisam da ferramenta de delegação habilitada pelo ambiente. Este projeto é uma aplicação estática e não possui manifesto de dependências, scripts de build, lint ou testes automatizados; agentes não devem inventar essas validações. Testes em navegador, análise de dependências ou outras verificações só podem ser declarados quando ferramentas apropriadas estiverem disponíveis e forem realmente usadas. Agentes para VS Code não devem ser tratados como um pipeline de CI nem como prova de que a aplicação está segura.
+
+Documentação oficial consultada:
+
+- [Agentes personalizados no VS Code](https://code.visualstudio.com/docs/agent-customization/custom-agents)
+- [Delegar trabalho a subagentes no VS Code](https://code.visualstudio.com/docs/agents/run/subagents)
+- [Referência de configuração de agentes personalizados do GitHub Copilot](https://docs.github.com/en/copilot/reference/custom-agents-configuration)

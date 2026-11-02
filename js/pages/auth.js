@@ -18,7 +18,7 @@ if (senhaSalva && emailSalvo) {
         alertGood.style.display = "flex"
 
         setTimeout(() => {
-            window.location.href = "./Home/home.html";
+            window.location.href = "./pages/dashboard.html";
         }, 1000);
     }, 6000)
 }
